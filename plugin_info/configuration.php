@@ -27,83 +27,83 @@ if (!isConnect()) {
         <div class="form-group">
             <label class="col-lg-4 control-label">Mon Token Melcloud (ne pas remplir)</label>
             <div class="col-lg-2">
-                <input class="configKey form-control" data-l1key="MyToken" />
+                <input class="configKey form-control" data-l1key="MyToken"/>
             </div>
         </div>
         <div class="form-group">
             <label class="col-lg-4 control-label">Mon Email Melcloud</label>
             <div class="col-lg-2">
-                <input class="configKey form-control" data-l1key="MyEmail" />
-        </div>
-    <div class="form-group">
-    <label class="col-lg-4 control-label">Mon Mot de passe Melcloud</label>
-    <div class="col-lg-2">
-    <input class="configKey form-control" data-l1key="MyPassword" />
-    </div>
-  
-  </br>
-  </br>
-  </br>
-  </br>
+                <input class="configKey form-control" data-l1key="MyEmail"/>
+            </div>
             <div class="form-group">
-                    <label class="col-lg-4 control-label">Etape 1 : </label>
-                    <div class="col-lg-8">
-                        <a class="btn btn-success bt_restartTeleinfoDeamon">Obtenir Token aupres de Melcloud</a>
-                    </div>
-                   
+                <label class="col-lg-4 control-label">Mon Mot de passe Melcloud</label>
+                <div class="col-lg-2">
+                    <input class="configKey form-control" data-l1key="MyPassword"/>
                 </div>
-                      
-       
-            <div class="form-group">
-                    <label class="col-lg-4 control-label">Etape 2 : </label>
-                    <div class="col-lg-8">
-                        <a class="btn btn-success bt_restartTeleinfoDeamon2">Mise à Jour des informations</a>
-                    </div>
-                   
-                </div>
-  
 
-</div>
-  </fieldset>
+                </br>
+                </br>
+                </br>
+                </br>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Connexion : </label>
+                    <div class="col-lg-8">
+                        <a class="btn btn-success bt_restartTeleinfoDeamon">Obtenir Token</a>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Divers : </label>
+                    <div class="col-lg-8">
+                        <a class="btn btn-success bt_restartTeleinfoDeamon2">Mise à Jour</a>
+                    </div>
+
+                </div>
+
+
+            </div>
+    </fieldset>
 </form>
-                      
-                      
+
+
 <script>
-  $('.bt_restartTeleinfoDeamon').on('click', function () {
+    $('.bt_restartTeleinfoDeamon').on('click', function () {
         $.ajax({// fonction permettant de faire de l'ajax
             type: "POST", // methode de transmission des données au fichier php
             url: "plugins/melcloud/core/ajax/melcloud.ajax.php", // url du fichier php
             data: {
                 action: "gettoken",
-                id : $(this).closest('.slaveConfig').attr('data-slave_id')
+                id: $(this).closest('.slaveConfig').attr('data-slave_id')
             },
             dataType: 'json',
             error: function (request, status, error) {
                 handleAjaxError(request, status, error);
             },
-            success: function (data) {  
+            success: function (data) {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
             }
-          
-		});
-		});
 
-$('.bt_restartTeleinfoDeamon2').on('click', function () {
+        });
+    });
+
+    $('.bt_restartTeleinfoDeamon2').on('click', function () {
         $.ajax({// fonction permettant de faire de l'ajax
             type: "POST", // methode de transmission des données au fichier php
             url: "plugins/melcloud/core/ajax/melcloud.ajax.php", // url du fichier php
             data: {
                 action: "pull",
-                id : $(this).closest('.slaveConfig').attr('data-slave_id')
+                id: $(this).closest('.slaveConfig').attr('data-slave_id')
             },
             dataType: 'json',
             error: function (request, status, error) {
                 handleAjaxError(request, status, error);
             },
-            success: function (data) {  
+            success: function (data) {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
             }
-          
-		});
-		});
+
+        });
+    });
 </script>

@@ -12,9 +12,6 @@ if (isset($argv)) {
 }
 
 //template::createFromDef('florian');
-    
-    
-    
 
 
 ?>

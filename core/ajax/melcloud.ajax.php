@@ -23,14 +23,14 @@ try {
     if (!isConnect('admin')) {
         throw new Exception(__('401 - Accès non autorisé', __FILE__));
     }
-  
-  
-   if (init('action') == 'gettoken') {
+
+
+    if (init('action') == 'gettoken') {
         melcloud::gettoken();
         ajax::success();
     }
-  
-   if (init('action') == 'pull') {
+
+    if (init('action') == 'pull') {
         melcloud::pull();
         ajax::success();
     }

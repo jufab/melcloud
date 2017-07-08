@@ -18,8 +18,9 @@
 
 require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 
-function melcloud_install() {
-    
+function melcloud_install()
+{
+
     $cron = cron::byClassAndFunction('melcloud', 'pull');
     if (!is_object($cron)) {
         $cron = new cron();
@@ -27,32 +28,34 @@ function melcloud_install() {
         $cron->setFunction('pull');
         $cron->setEnable(1);
         $cron->setDeamon(0);
-        $cron->setSchedule('*/5 * * * *');
+        $cron->setSchedule('*/2 * * * *');
         $cron->save();
     }
-    
+
 }
 
-function melcloud_update() {
-  
-  log::add('melcloud', 'error', 'Cron bien installé');
-  
-   $cron = cron::byClassAndFunction('melcloud', 'pull');
+function melcloud_update()
+{
+
+    log::add('melcloud', 'error', 'Cron bien installé');
+
+    $cron = cron::byClassAndFunction('melcloud', 'pull');
     if (!is_object($cron)) {
         $cron = new cron();
         $cron->setClass('melcloud');
         $cron->setFunction('pull');
         $cron->setEnable(1);
         $cron->setDeamon(0);
-        $cron->setSchedule('*/5 * * * *');
+        $cron->setSchedule('*/2 * * * *');
         $cron->save();
     }
-    
+
 }
 
 
-function melcloud_remove() {
-    
+function melcloud_remove()
+{
+
 }
 
 ?>
