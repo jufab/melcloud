@@ -29,7 +29,7 @@ class melcloud extends eqLogic
     public static function SetPower($option, $mylogical)
     {
 
-        log::add('melcloud', 'info', 'SetPower');
+        log::add('melcloud', 'debug', 'SetPower ' . $option);
 
         $montoken = config::byKey('MyToken', 'melcloud', '');
 
@@ -69,7 +69,7 @@ class melcloud extends eqLogic
 
     public static function SetFan($option, $mylogical)
     {
-        log::add('melcloud', 'info', 'SetFan');
+        log::add('melcloud', 'debug', 'SetFan '. $option);
         $montoken = config::byKey('MyToken', 'melcloud', '');
         if ($montoken != '') {
             $montoken = config::byKey('MyToken', 'melcloud', '');
@@ -82,11 +82,6 @@ class melcloud extends eqLogic
             $device['SetFanSpeed'] = $option;
             $device['EffectiveFlags'] = '8';
             $device['HasPendingCommand'] = 'true';
-            if ($option == '0') {
-                cmd::byEqLogicIdCmdName($mylogical->getId(), 'ActualFanSpeed')->setDisplay('showOndashboard', '1');
-            } else {
-                cmd::byEqLogicIdCmdName($mylogical->getId(), 'ActualFanSpeed')->setDisplay('showOndashboard', '0');
-            }
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, "https://app.melcloud.com/Mitsubishi.Wifi.Client/Device/SetAta");
             curl_setopt($ch, CURLOPT_POST, 1);
@@ -105,7 +100,7 @@ class melcloud extends eqLogic
 
     public static function SetTemp($newtemp, $mylogical)
     {
-        log::add('melcloud', 'info', 'SetTemp' . $newtemp);
+        log::add('melcloud', 'debug', 'SetTemp ' . $newtemp);
         $montoken = config::byKey('MyToken', 'melcloud', '');
         if ($montoken != '') {
             $devideid = $mylogical->getConfiguration('deviceid');
@@ -137,7 +132,7 @@ class melcloud extends eqLogic
 
     public static function SetMode($newmode, $mylogical)
     {
-        log::add('melcloud', 'info', 'SetMode' . $newmode);
+        log::add('melcloud', 'debug', 'SetMode' . $newmode);
         $montoken = config::byKey('MyToken', 'melcloud', '');
         if ($montoken != '') {
             $devideid = $mylogical->getConfiguration('deviceid');
@@ -252,10 +247,10 @@ class melcloud extends eqLogic
     private static function pullCommande($device) {
         log::add('melcloud', 'debug', 'pull : ' . $device['DeviceName']);
         if ($device['DeviceID'] == '') return;
-        log::add('melcloud', 'debug', $device['DeviceID'] . ' ' . $device['DeviceName']);
+        log::add('melcloud', 'info', $device['DeviceID'] . ' ' . $device['DeviceName']);
         foreach (eqLogic::byType('melcloud', true) as $mylogical) {
             if ($mylogical->getConfiguration('namemachine') != $device['DeviceName']) continue;
-            log::add('melcloud', 'info', 'setdevice ' . $device['Device']['DeviceID']);
+            log::add('melcloud', 'debug', 'setdevice ' . $device['Device']['DeviceID']);
             $mylogical->setConfiguration('deviceid', $device['Device']['DeviceID']);
             $mylogical->setConfiguration('buildid', $device['BuildingID']);
             $mylogical->save();
@@ -400,17 +395,6 @@ class melcloud extends eqLogic
         $off->setValue($onoff_state->getId());
         $off->save();
 
-        /*
-        $onoff = new melcloudCmd();
-        $onoff->setName('On/Off');
-        $onoff->setEqLogic_id($this->getId());
-        $onoff->setType('action');
-        $onoff->setSubType('slider');
-        $onoff->setDisplay('slider_placeholder','1 = Allumer, 0 = Eteindre');
-        $onoff->setIsHistorized(0);
-        $onoff->setIsVisible(0);
-        $onoff->save();*/
-
 
         $ventilation = new melcloudCmd();
         $ventilation->setName('Ventilation');
@@ -515,25 +499,10 @@ class melcloudCmd extends cmd
             log::add('melcloud', 'debug', 'Extinction');
             melcloud::SetPower('false', $this->getEqLogic());
         }
-        /*
-        if ('On/Off' == $this->name) {
-
-            if (isset($_options['slider']) && isset($_options['auto']) == false) {
-
-                $newPower = $_options['slider'];
-                if (0 == $_options['slider']) {
-                    melcloud::SetPower('false', $this->getEqLogic());
-                } else {
-                    melcloud::SetPower('true', $this->getEqLogic());
-                }
-            }
-
-        }*/
 
         if ('Ventilation' == $this->name) {
             if (isset($_options['slider']) && isset($_options['auto']) == false) {
-                $newFanSpeed = $_options['slider'];
-                melcloud::SetFan($newFanSpeed, $this->getEqLogic());
+                melcloud::SetFan($_options['slider'], $this->getEqLogic());
             }
         }
 
