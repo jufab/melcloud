@@ -267,17 +267,17 @@ class melcloud extends eqLogic
                         log::add('melcloud', 'debug', 'log ' . $cmd->getName() . ' : On ne traite pas cette commande');
                         break;
                     case 'Mode':
-                        log::add('melcloud', 'debug', 'log ' . $cmd->getName() . ' ' . $device['Device'][OperationMode]);
+                        log::add('melcloud', 'debug', 'log ' . $cmd->getName() . ' ' . $device['Device']['OperationMode']);
                         $cmd->setCollectDate('');
                         $cmd->event($device['Device']['OperationMode']);
                         break;
                     case 'Ventilation':
-                        log::add('melcloud', 'debug', 'log ' . $cmd->getName() . ' ' . $device['Device'][FanSpeed]);
+                        log::add('melcloud', 'debug', 'log ' . $cmd->getName() . ' ' . $device['Device']['FanSpeed']);
                         $cmd->setCollectDate('');
                         $cmd->event($device['Device']['FanSpeed']);
                         break;
                     case 'Consigne':
-                        log::add('melcloud', 'debug', 'log ' . $cmd->getName() . ' ' . $device['Device'][SetTemperature]);
+                        log::add('melcloud', 'debug', 'log ' . $cmd->getName() . ' ' . $device['Device']['SetTemperature']);
                         $cmd->setCollectDate('');
                         $cmd->event($device['Device']['SetTemperature']);
                         break;
