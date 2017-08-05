@@ -444,6 +444,15 @@ class melcloud extends eqLogic
         $FanSpeed->save();
         $FanSpeed->setValue(0);
         $FanSpeed->event(0);
+
+        $refresh = new melcloudCmd();
+        $refresh->setLogicalId('refresh');
+        $refresh->setIsVisible(1);
+        $refresh->setName('Rafraichir');
+        $refresh->setEqLogic_id($this->getId());
+        $refresh->setType('action');
+        $refresh->setSubType('other');
+        $refresh->save();
     }
 
     public function preSave(){}
