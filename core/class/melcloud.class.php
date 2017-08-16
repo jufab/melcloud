@@ -298,7 +298,7 @@ class melcloud extends eqLogic
         }
     }
 
-    public static function obtenirInfo($mylogical) {
+    private static function obtenirInfo($mylogical) {
         log::add('melcloud', 'debug', 'getInfo ' . $mylogical);
         $montoken = config::byKey('MyToken', 'melcloud', '');
         if ($montoken != '') {
@@ -309,14 +309,14 @@ class melcloud extends eqLogic
             $json = $request->exec(30000, 2);
             $device = json_decode($json, true);
             log::add('melcloud', 'debug', 'Retour des information de getInfo ' . $device);
-            if(isset($device['WeatherObservations'])&& $device["WeatherObservations"].lenght>0) {
+            if(isset($device['WeatherObservations']) && $device["WeatherObservations"].lenght>0) {
                 $cmdExternal = $mylogical->getCmd(null, 'ExternalTemperature');
                 $cmdExternal->event($device['WeatherObservations'][0]['Icon']);
                 $cmdCurrent = $mylogical->getCmd(null, 'CurrentWeather');
                 $cmdCurrent->event($device['WeatherObservations'][0]['Temperature']);
             }
         }
-        $mylogical->Refresh();
+        //$mylogical->Refresh();
     }
 
     //Fonction exécutée automatiquement toutes les minutes par Jeedom
@@ -574,7 +574,7 @@ class melcloudCmd extends cmd
         }
         if ('Rafraichir' == $this->name) {
             melcloud::pull();
-            //melcloud::obtenirInfo($this->getEqLogic());
+
         }
     }
     /*     * **********************Getteur Setteur*************************** */
