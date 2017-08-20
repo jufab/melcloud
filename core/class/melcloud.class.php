@@ -259,9 +259,8 @@ class melcloud extends eqLogic
                     switch ($cmd->getLogicalId()) {
                         case 'On':
                         case 'Off':
-                        case 'Rafraichir':
-                        case 'Temps actuel':
-                        case 'Temperature exterieure':
+                        case 'refresh':
+                        case 'CurrentWeather':
                         case 'Test':
                             log::add('melcloud', 'debug', 'log ' . $cmd->getName() . ' : On ne traite pas cette commande');
                             break;
@@ -388,10 +387,10 @@ class melcloud extends eqLogic
         $Consigne->save();
 
 
-        $onoff_state = $this->getCmd(null, 'onoff_state');
+        $onoff_state = $this->getCmd(null, 'Power');
         if (!is_object($onoff_state)) {
             $onoff_state = new melcloudCmd();
-            $onoff_state->setLogicalId('onoff_state');
+            $onoff_state->setLogicalId('Power');
             $onoff_state->setIsVisible(1);
             $onoff_state->setName(__('Power', __FILE__));
         }
@@ -402,7 +401,7 @@ class melcloud extends eqLogic
 
         $on = new melcloudCmd();
         $on->setName('On');
-        $on->setLogicalId('on');
+        $on->setLogicalId('On');
         $on->setEqLogic_id($this->getId());
         $on->setType('action');
         $on->setSubType('other');
@@ -416,7 +415,7 @@ class melcloud extends eqLogic
 
         $off = new melcloudCmd();
         $off->setName('Off');
-        $off->setLogicalId('off');
+        $off->setLogicalId('Off');
         $off->setEqLogic_id($this->getId());
         $off->setType('action');
         $off->setSubType('other');
@@ -581,11 +580,11 @@ class melcloudCmd extends cmd
                 melcloud::SetTemp($_options['slider'], $this->getEqLogic());
             }
         }
-        if ('on' == $this->logicalId) {
+        if ('On' == $this->logicalId) {
             log::add('melcloud', 'debug', 'Allumage');
             melcloud::SetPower('true', $this->getEqLogic());
         }
-        if ('off' == $this->logicalId) {
+        if ('Off' == $this->logicalId) {
             log::add('melcloud', 'debug', 'Extinction');
             melcloud::SetPower('false', $this->getEqLogic());
         }
