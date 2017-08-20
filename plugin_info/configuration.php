@@ -25,45 +25,42 @@ if (!isConnect()) {
 <form class="form-horizontal">
     <fieldset>
         <div class="form-group">
+            <label class="col-lg-2 control-label">Mon Email Melcloud</label>
+            <div class="col-lg-2">
+                <input class="configKey form-control" data-l1key="MyEmail"/>
+            </div>
+            <label class="col-lg-2 control-label">Mon Mot de passe Melcloud</label>
+            <div class="col-lg-2">
+                <input type="password" class="configKey form-control" data-l1key="MyPassword"/>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-lg-4 control-label">Mon Token Melcloud (ne pas remplir)</label>
             <div class="col-lg-2">
                 <input class="configKey form-control" data-l1key="MyToken"/>
             </div>
         </div>
+        </br>
+        </br>
         <div class="form-group">
-            <label class="col-lg-4 control-label">Mon Email Melcloud</label>
-            <div class="col-lg-2">
-                <input class="configKey form-control" data-l1key="MyEmail"/>
+            <label class="col-lg-4 control-label">Etape 1 : </label>
+            <div class="col-lg-8">
+                <a class="btn btn-success bt_restartTeleinfoDeamon">Obtenir Token aupres de Melcloud</a>
             </div>
-            <div class="form-group">
-                <label class="col-lg-4 control-label">Mon Mot de passe Melcloud</label>
-                <div class="col-lg-2">
-                    <input class="configKey form-control" data-l1key="MyPassword"/>
-                </div>
 
-                </br>
-                </br>
-                </br>
-                </br>
-                <div class="form-group">
-                    <label class="col-lg-4 control-label">Connexion : </label>
-                    <div class="col-lg-8">
-                        <a class="btn btn-success bt_restartTeleinfoDeamon">Obtenir Token</a>
-                    </div>
-
-                </div>
+        </div>
 
 
-                <div class="form-group">
-                    <label class="col-lg-4 control-label">Divers : </label>
-                    <div class="col-lg-8">
-                        <a class="btn btn-success bt_restartTeleinfoDeamon2">Mise à Jour</a>
-                    </div>
-
-                </div>
-
-
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Etape 2 : </label>
+            <div class="col-lg-8">
+                <a class="btn btn-success bt_restartTeleinfoDeamon2">Mise à Jour des informations</a>
             </div>
+
+        </div>
+
+
+        </div>
     </fieldset>
 </form>
 
