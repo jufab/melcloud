@@ -263,6 +263,10 @@ class melcloud extends eqLogic
                         case 'CurrentWeather':
                             log::add('melcloud', 'debug', 'log ' . $cmd->getLogicalId() . ' : On ne traite pas cette commande');
                             break;
+                        case 'FanSpeed':
+                            log::add('melcloud', 'debug', 'log pour le FanSpeed' . $cmd->getLogicalId() . ' ' . $device['Device'][$cmd->getLogicalId()]);
+                            $cmd->setConfiguration('maxValue', $device['Device']['NumberOfFanSpeeds']);
+                            //on break pas exprès pour le default!
                         default:
                             log::add('melcloud', 'debug', 'log ' . $cmd->getLogicalId() . ' ' . $device['Device'][$cmd->getLogicalId()]);
                             if ('LastTimeStamp' == $cmd->getLogicalId()) {
@@ -333,6 +337,8 @@ class melcloud extends eqLogic
         $RoomTemperature->setLogicalId('RoomTemperature');
         $RoomTemperature->setType('info');
         $RoomTemperature->setSubType('numeric');
+        $RoomTemperature->setTemplate('dashboard','thermometreIMG');
+        $RoomTemperature->setTemplate('mobile','tempIMG');
         $RoomTemperature->setIsHistorized(0);
         $RoomTemperature->setIsVisible(1);
         $RoomTemperature->setUnite('°C');
@@ -362,7 +368,7 @@ class melcloud extends eqLogic
         if (!is_object($onoff_state)) {
             $onoff_state = new melcloudCmd();
             $onoff_state->setLogicalId('Power');
-            $onoff_state->setIsVisible(1);
+            $onoff_state->setIsVisible(0);
             $onoff_state->setName(__('Power', __FILE__));
         }
         $onoff_state->setType('info');
@@ -377,6 +383,7 @@ class melcloud extends eqLogic
         $on->setType('action');
         $on->setSubType('other');
         $on->setTemplate('dashboard','OnOffslide');
+        $on->setTemplate('mobile','ToggleSwitch_IMG');
         $on->setIsHistorized(0);
         $on->setIsVisible(1);
         $on->setDisplay('generic_type', 'ENERGY_ON');
@@ -392,6 +399,7 @@ class melcloud extends eqLogic
         $off->setType('action');
         $off->setSubType('other');
         $off->setTemplate('dashboard','OnOffslide');
+        $off->setTemplate('mobile','ToggleSwitch_IMG');
         $off->setIsHistorized(0);
         $off->setIsVisible(1);
         $off->setDisplay('generic_type', 'ENERGY_OFF');
@@ -450,15 +458,6 @@ class melcloud extends eqLogic
         $refresh->setType('action');
         $refresh->setSubType('other');
         $refresh->save();
-
-        $testCmd = new melcloudCmd();
-        $testCmd->setLogicalId('Test');
-        $testCmd->setIsVisible(1);
-        $testCmd->setName('Test');
-        $testCmd->setEqLogic_id($this->getId());
-        $testCmd->setType('action');
-        $testCmd->setSubType('other');
-        $testCmd->save();
 
         $currentWeather = new melcloudCmd();
         $currentWeather->setName(__('Temps actuel', __FILE__));
@@ -563,10 +562,6 @@ class melcloudCmd extends cmd
         }
         if ('refresh' == $this->logicalId) {
             melcloud::pull();
-        }
-        if('Test' == $this->logicalId) {
-            log::add('melcloud', 'debug', 'Test');
-            melcloud::obtenirInfo($this->getEqLogic());
         }
     }
     /*     * **********************Getteur Setteur*************************** */
