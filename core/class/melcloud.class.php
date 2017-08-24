@@ -341,6 +341,7 @@ class melcloud extends eqLogic
         $RoomTemperature->setValue(0);
         $RoomTemperature->event(0);
 
+
         $Consigne = new melcloudCmd();
         $Consigne->setName('Consigne');
         $Consigne->setEqLogic_id($this->getId());
@@ -375,6 +376,7 @@ class melcloud extends eqLogic
         $on->setEqLogic_id($this->getId());
         $on->setType('action');
         $on->setSubType('other');
+        $on->setTemplate('dashboard','OnOffslide');
         $on->setIsHistorized(0);
         $on->setIsVisible(1);
         $on->setDisplay('generic_type', 'ENERGY_ON');
@@ -389,6 +391,7 @@ class melcloud extends eqLogic
         $off->setEqLogic_id($this->getId());
         $off->setType('action');
         $off->setSubType('other');
+        $off->setTemplate('dashboard','OnOffslide');
         $off->setIsHistorized(0);
         $off->setIsVisible(1);
         $off->setDisplay('generic_type', 'ENERGY_OFF');
