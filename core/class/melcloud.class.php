@@ -352,7 +352,7 @@ class melcloud extends eqLogic
         $RoomTemperature->setIsHistorized(0);
         $RoomTemperature->setIsVisible(1);
         $RoomTemperature->setUnite('°C');
-        $RoomTemperature->setTemplate('dashboard', 'tile');
+        //$RoomTemperature->setTemplate('dashboard', 'tile');
         $RoomTemperature->save();
         $RoomTemperature->setValue(0);
         $RoomTemperature->event(0);
@@ -365,7 +365,7 @@ class melcloud extends eqLogic
         $SetTemperature->setSubType('numeric');
         $SetTemperature->setIsHistorized(0);
         $SetTemperature->setUnite('°C');
-        $SetTemperature->setTemplate('dashboard', 'tile');
+        //$SetTemperature->setTemplate('dashboard', 'tile');
         $SetTemperature->setIsVisible(1);
         $SetTemperature->save();
         $SetTemperature->setValue(0);
@@ -433,9 +433,9 @@ class melcloud extends eqLogic
         $ventilation->setEqLogic_id($this->getId());
         $ventilation->setLogicalId('Ventilation');
         $ventilation->setType('action');
-        $ventilation->setSubType('select');
+        $ventilation->setSubType('slider');
         $ventilation->setIsHistorized(0);
-        $ventilation->setConfiguration('listValue','0|Automatique;1|Vitesse 1;2|Vitesse 2;3|Vitesse 3;4|Vitesse 4;5|Vitesse 5');
+        //$ventilation->setConfiguration('listValue','0|Automatique;1|Vitesse 1;2|Vitesse 2;3|Vitesse 3;4|Vitesse 4;5|Vitesse 5');
         //$ventilation->setDisplay('slider_placeholder', '0 = automatique, 1 a 5 manuel');
         $ventilation->setTemplate('dashboard', 'thermostat');
         $ventilation->setIsVisible(0);
