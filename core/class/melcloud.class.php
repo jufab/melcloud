@@ -418,7 +418,7 @@ class melcloud extends eqLogic
         $ventilation->setIsHistorized(0);
         //$ventilation->setConfiguration('listValue','0|Automatique;1|Vitesse 1;2|Vitesse 2;3|Vitesse 3;4|Vitesse 4;5|Vitesse 5');
         //$ventilation->setDisplay('slider_placeholder', '0 = automatique, 1 a 5 manuel');
-        $ventilation->setTemplate('dashboard', 'thermostat');
+        $ventilation->setTemplate('dashboard', 'button');
         $ventilation->setIsVisible(0);
         $ventilation->setConfiguration('maxValue', 5);
         $ventilation->setConfiguration('minValue', 0);
