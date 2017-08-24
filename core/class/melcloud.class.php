@@ -471,6 +471,7 @@ class melcloud extends eqLogic
         $currentWeather->setIsVisible(1);
         $currentWeather->setValue(0);
         $currentWeather->setTemplate('dashboard','CurrentWeather' );
+        $currentWeather->setTemplate('mobile','CurrentWeather' );
         $currentWeather->save();
     }
 
