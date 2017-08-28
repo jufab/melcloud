@@ -329,8 +329,15 @@ class melcloud extends eqLogic
 
     public function preInsert(){}
 
-    public function postInsert()
-    {
+    public function postInsert() {}
+
+    public function preSave(){}
+
+    public function postSave(){
+        if ($this->getConfiguration('deviceid') == '') {
+            self::pull();
+            if ($this->getConfiguration('deviceid') == '') return;
+        }
         $RoomTemperature = new melcloudCmd();
         $RoomTemperature->setName('RoomTemperature');
         $RoomTemperature->setEqLogic_id($this->getId());
@@ -342,7 +349,6 @@ class melcloud extends eqLogic
         $RoomTemperature->setIsHistorized(0);
         $RoomTemperature->setIsVisible(1);
         $RoomTemperature->setUnite('°C');
-        //$RoomTemperature->setTemplate('dashboard', 'tile');
         $RoomTemperature->save();
         $RoomTemperature->setValue(0);
         $RoomTemperature->event(0);
@@ -474,10 +480,6 @@ class melcloud extends eqLogic
         $currentWeather->setTemplate('mobile','CurrentWeather' );
         $currentWeather->save();
     }
-
-    public function preSave(){}
-
-    public function postSave(){}
 
     public function preUpdate(){}
 
