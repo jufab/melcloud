@@ -344,7 +344,7 @@ class melcloud extends eqLogic
         $RoomTemperature = $this->getCmd(null, 'RoomTemperature');
         if (!is_object($RoomTemperature)) {
             $RoomTemperature = new melcloudCmd();
-            $RoomTemperature->setName('RoomTemperature');
+            $RoomTemperature->setName('Température');
             $RoomTemperature->setEqLogic_id($this->getId());
             $RoomTemperature->setLogicalId('RoomTemperature');
             $RoomTemperature->setType('info');
@@ -407,6 +407,7 @@ class melcloud extends eqLogic
             $on->setConfiguration('updateCmdId', $onoff_state->getEqLogic_id());
             $on->setConfiguration('updateCmdToValue', 1);
             $on->setValue($onoff_state->getId());
+            $on->setOrder(1);
             $on->save();
         }
 
@@ -426,6 +427,7 @@ class melcloud extends eqLogic
             $off->setConfiguration('updateCmdId', $onoff_state->getEqLogic_id());
             $off->setConfiguration('updateCmdToValue', 0);
             $off->setValue($onoff_state->getId());
+            $on->setOrder(2);
             $off->save();
         }
 
@@ -465,7 +467,7 @@ class melcloud extends eqLogic
         $actualFanSpeed = $this->getCmd(null, 'ActualFanSpeed');
         if (!is_object($actualFanSpeed)) {
             $actualFanSpeed = new melcloudCmd();
-            $actualFanSpeed->setName('ActualFanSpeed');
+            $actualFanSpeed->setName('Vitesse');
             $actualFanSpeed->setEqLogic_id($this->getId());
             $actualFanSpeed->setLogicalId('ActualFanSpeed');
             $actualFanSpeed->setType('info');
