@@ -20,14 +20,14 @@
 
     <script>
         if (jeedom.cmd.normalizeName('#name#') == 'on') {
-            $('#iconCmd#id#').append('<img src="plugins/melcloud/core/template/dashboard/cmd.action.other.OnOffLight/onoff_on.png" class="OnOffLight#id#" />');
+            $('#iconCmd#id#').append('<img src="plugins/melcloud/core/template/dashboard/cmd.action.other.OnOffLight/onoff_off.png" class="OnOffLight#id#" />');
             if ('#state#' != 0) {
                 $('.cmd[data-cmd_id=#id#]').hide();
             }
 
         }
         if (jeedom.cmd.normalizeName('#name#') == 'off') {
-            $('#iconCmd#id#').append('<img src="plugins/melcloud/core/template/dashboard/cmd.action.other.OnOffLight/onoff_off.png" class="OnOffLight#id#"/>');
+            $('#iconCmd#id#').append('<img src="plugins/melcloud/core/template/dashboard/cmd.action.other.OnOffLight/onoff_on.png" class="OnOffLight#id#"/>');
 
             if ('#state#' == 0) {
                 $('.cmd[data-cmd_id=#id#]').hide();
