@@ -3,66 +3,87 @@
     <!-- La partie CSS -->
 
     <style>
-        div.modePAC#id {
+        div.modePAC#id# {
             margin-top: 0px;
             width: 175px;
             min-height: 35px;
             min-width: 175px;
         }
-        #modeListe {
+        .modeListe#id# {
             position: relative;
         }
-        #modeListe li {
+        .modeListe#id# li {
             margin: 0;
             padding: 0;
             list-style: none;
             position: absolute;
             top: 0;
         }
-        #modeListe li, #modeListe i {
+        .modeListe#id# li, #modeListe#id# i {
             height: 35px;
             display: block;
         }
-        #chaud {
+        .chaud#id# {
             left: 0px;
             width: 35px;
             background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') 0 -35px;
         }
-        #chaud i:hover {
+        .chaud#id# i:hover {
             left: 0px;
             width: 35px;
             background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') 0 0;
         }
-        #froid {
+        .froid#id# {
             left: 35px;
             width: 35px;
             background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') -35px -35px;
         }
-        #froid i:hover{
+        .froid#id# i:hover{
             left: 35px;
             width: 35px;
             background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') -35px 0;
         }
-        #rafraichir {
-
+        .rafraichir#id# {
+            left: 35px;
+            width: 35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') -70px -35px;
         }
-        #ventilation {
-
+        .rafraichir#id# i:hover{
+            left: 35px;
+            width: 35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') -70px 0;
         }
-        #auto {
-
+        .ventilation#id# {
+            left: 35px;
+            width: 35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') -105px -35px;
+        }
+        .ventilation#id# i:hover{
+            left: 35px;
+            width: 35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') -105px 0;
+        }
+        .auto#id# {
+            left: 35px;
+            width: 35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') -140px -35px;
+        }
+        .auto#id# i:hover{
+            left: 35px;
+            width: 35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') -140px 0;
         }
     </style>
 
     <!-- la partie html -->
     <p class='cmdName' style="font-weight: bold;font-size : 12px;">#name#</p>
     <span class="pull-left">
-        <ul id="modeListe">
-            <li id="chaud"><i></i></li>
-            <li id="froid"><i></i></li>
-            <li id="rafraichir"><i></i></li>
-            <li id="ventilation"><i></i></li>
-            <li id="auto"><i></i></li>
+        <ul class="modeListe#id#">
+            <li class="chaud#id#"><i></i></li>
+            <li class="froid#id#"><i></i></li>
+            <li class="rafraichir#id#"><i></i></li>
+            <li class="ventilation#id#"><i></i></li>
+            <li class="auto#id#"><i></i></li>
         </ul>
         <!--<img class="info iconCmd#id#" width="35px"/>-->
     </span>
