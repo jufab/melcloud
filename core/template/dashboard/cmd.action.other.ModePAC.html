@@ -1,0 +1,90 @@
+<div class="cmd container-fluid tooltips cmd cmd-widget modePAC#id#" data-type="action" data-subtype="string"
+     data-cmd_id="#id#">
+    <!-- La partie CSS -->
+
+    <style>
+        div.modePAC#id {
+            margin-top: 0px;
+            width: 175px;
+            min-height: 35px;
+            min-width: 175px;
+        }
+        #modeListe {
+            position: relative;
+        }
+        #modeListe li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            position: absolute;
+            top: 0;
+        }
+        #modeListe li, #modeListe i {
+            height: 35px;
+            display: block;
+        }
+        #chaud {
+            left: 0px;
+            width: 35px;
+            background: url('modePAC.png') 0 0;
+        }
+        #chaud i:hover {
+            left: 0px;
+            width: 35px;
+            background: url('modePAC.png') 0 -34px;
+        }
+        #froid {
+            left: 35px;
+            width: 35px;
+            background: url('modePAC.png') -36px 0;
+        }
+        #froid i:hover{
+            left: 35px;
+            width: 35px;
+            background: url('modePAC.png') -36px -34px;
+        }
+        #rafraichir {
+
+        }
+        #ventilation {
+
+        }
+        #auto {
+
+        }
+    </style>
+
+    <!-- la partie html -->
+    <p class='cmdName' style="font-weight: bold;font-size : 12px;">#name#</p>
+    <span class="pull-left">
+        <ul id="modeListe">
+            <li id="chaud"><i></i></li>
+            <li id="froid"><i></i></li>
+            <li id="rafraichir"><i></i></li>
+            <li id="ventilation"><i></i></li>
+            <li id="auto"><i></i></li>
+        </ul>
+        <!--<img class="info iconCmd#id#" width="35px"/>-->
+    </span>
+
+    <!-- la partie script -->
+    <script>
+        var modePAC = #state#;//OperationMode 1(chaud)-2(froid)-3(rafraichir)-7(ventilation)-8(auto)
+
+
+        /*
+                $('.iconCmd#id#').empty();
+                if (weatherValue != null) {
+                    if (weatherValue.Icon != '') {
+                        $('.iconCmd#id#').attr('src', 'https://app.melcloud.com/css/weather/' + weatherValue.Icon + '.png');
+                    }
+                    if (weatherValue.ConditionName != '') {
+                        $('.iconCmd#id#').attr('alt', weatherValue.ConditionName);
+                        $('.tempExt#id#').append('<span style="margin-left: 5px;font-size: 0.8em;">' + weatherValue.ConditionName + '</span><br>');
+                    }
+                    if (weatherValue.Temperature != '' && weatherValue.Humidity != '') {
+                        $('.tempExt#id#').append('<span style="margin-left: 5px;font-size: 0.8em;">' + weatherValue.Temperature + ' °C / ' + weatherValue.Humidity + ' %</span>');
+                    }
+                }*/
+    </script>
+</div>

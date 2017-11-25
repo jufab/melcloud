@@ -1,4 +1,4 @@
-<div class="cmd tooltips cmd-widget cursor OnOffLight#id#" data-type="info" data-subtype="numeric" data-cmd_id="#id#">
+<div class="cmd tooltips cmd-widget cursor OnOffLight#id#" data-type="action" data-cmd_id="#id#">
     <center>
         <span style="font-size: 2.5em;" class="action_OnOffLight#id#" id="iconCmd#id#"></span>
     </center>
@@ -7,6 +7,7 @@
             margin-top : 0px;
             width:38px;
             min-height:37px;
+            min-width: 38px;
         }
         img.OnOffLight#id# {
             width: 38px;
@@ -17,7 +18,6 @@
             font-size : 12px;
         }
     </style>
-
     <script>
         if (jeedom.cmd.normalizeName('#name#') == 'on') {
             $('#iconCmd#id#').append('<img src="plugins/melcloud/core/template/dashboard/cmd.action.other.OnOffLight/onoff_off.png" class="OnOffLight#id#" />');

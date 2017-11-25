@@ -456,11 +456,13 @@ class melcloud extends eqLogic
             $mode->setEqLogic_id($this->getId());
             $mode->setLogicalId('OperationMode');
             $mode->setType('action');
-            $mode->setSubType('select');
-            $mode->setConfiguration('listValue', '1|Chaud;2|Seche;3|Rafraichir;7|Ventilation;8|Auto');
+            $mode->setSubType('other');
+            $mode->setTemplate('dashboard', 'ModePAC');
+            $mode->setTemplate('mobile', 'ModePAC');
+            //$mode->setConfiguration('listValue', '1|Chaud;2|Seche;3|Rafraichir;7|Ventilation;8|Auto');
             //$mode->setDisplay('slider_placeholder', 'Chaud : 1 Seche : 2 Rafraichir : 3 Ventilation : 7 Auto :');
             $mode->setIsHistorized(0);
-            $mode->setIsVisible(0);
+            $mode->setIsVisible(1);
             $mode->save();
         }
 
