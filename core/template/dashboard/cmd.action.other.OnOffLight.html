@@ -1,0 +1,42 @@
+<div class="cmd tooltips cmd-widget cursor OnOffLight#id#" data-type="info" data-subtype="numeric" data-cmd_id="#id#">
+    <center>
+        <span style="font-size: 2.5em;" class="action_OnOffLight#id#" id="iconCmd#id#"></span>
+    </center>
+    <style>
+        div.OnOffLight#id# {
+            margin-top : 0px;
+            width:38px;
+            min-height:37px;
+        }
+        img.OnOffLight#id# {
+            width: 38px;
+            height: 37px;
+        }
+        span.cmdName#id# {
+            font-weight: bold;
+            font-size : 12px;
+        }
+    </style>
+
+    <script>
+        if (jeedom.cmd.normalizeName('#name#') == 'on') {
+            $('#iconCmd#id#').append('<img src="plugins/melcloud/core/template/dashboard/cmd.action.other.OnOffLight/onoff_on.png" class="OnOffLight#id#" />');
+            if ('#state#' != 0) {
+                $('.cmd[data-cmd_id=#id#]').hide();
+            }
+
+        }
+        if (jeedom.cmd.normalizeName('#name#') == 'off') {
+            $('#iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.action.other.OnOffLight/onoff_off.png" class="OnOffLight#id#"/>');
+
+            if ('#state#' == 0) {
+                $('.cmd[data-cmd_id=#id#]').hide();
+            }
+
+        }
+        $('.cmd[data-cmd_id=#id#] .action_OnOffLight#id#').off();
+        $('.cmd[data-cmd_id=#id#] .action_OnOffLight#id#').on('click', function() {
+            jeedom.cmd.execute({id: '#id#'});
+        });
+    </script>
+</div>

@@ -399,7 +399,7 @@ class melcloud extends eqLogic
             $on->setEqLogic_id($this->getId());
             $on->setType('action');
             $on->setSubType('other');
-            $on->setTemplate('dashboard', 'OnOffslide');
+            $on->setTemplate('dashboard', 'OnOffLight');
             $on->setTemplate('mobile', 'ToggleSwitch_IMG');
             $on->setIsHistorized(0);
             $on->setIsVisible(1);
@@ -419,7 +419,7 @@ class melcloud extends eqLogic
             $off->setEqLogic_id($this->getId());
             $off->setType('action');
             $off->setSubType('other');
-            $off->setTemplate('dashboard', 'OnOffslide');
+            $off->setTemplate('dashboard', 'OnOffLight');
             $off->setTemplate('mobile', 'ToggleSwitch_IMG');
             $off->setIsHistorized(0);
             $off->setIsVisible(1);
