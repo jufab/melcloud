@@ -450,6 +450,7 @@ class melcloud extends eqLogic
             $ventilation->save();
         }
 
+        //TODO faire un state comme le onOff pour avoir la valeur numerique et remettre en action celui-ci
         $mode = $this->getCmd(null, 'OperationMode');
         if (!is_object($mode)) {
             $mode = new melcloudCmd();
@@ -574,6 +575,7 @@ class melcloudCmd extends cmd
 
     public function execute($_options = array())
     {
+        log::add('melcloud', 'debug', 'Va executer la commande : '.$this->logicalId);
         if ('SetTemperature' ==  $this->logicalId) {
             if (isset($_options['slider']) && isset($_options['auto']) == false) {
                 melcloud::SetTemp($_options['slider'], $this->getEqLogic());
