@@ -157,7 +157,7 @@ class melcloud extends eqLogic
             $server_output = curl_exec($ch);
             curl_close($ch);
             $json = json_decode($server_output, true);
-            self::nextCommunication($json,$mylogical);
+            self::nextCommunication($json,$mylogical,false,$newmode);
         }
     }
 
@@ -169,6 +169,9 @@ class melcloud extends eqLogic
                 $time = date('G:i:s', $time); // Back to string
                 $cmd->event($time);
             } else if ($power &&'Power' == $cmd->getLogicalId()) {
+                $cmd->setCollectDate('');
+                $cmd->event($option);
+            } else if ('OperationMode' == $cmd->getLogicalId()) {
                 $cmd->setCollectDate('');
                 $cmd->event($option);
             }
@@ -592,7 +595,8 @@ class melcloudCmd extends cmd
         }
 
         if ('OperationMode' == $this->logicalId) {
-            if (isset($_options['message']) && isset($_options['auto']) == false) {
+            log::add('melcloud', 'debug', 'Option pour OperationMode : '.var_export($_options,true));
+            if (isset($_options['message'])) {
                 melcloud::SetMode($_options['message'], $this->getEqLogic());
             }
         }
