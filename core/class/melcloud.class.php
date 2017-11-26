@@ -407,7 +407,6 @@ class melcloud extends eqLogic
             $on->setConfiguration('updateCmdId', $onoff_state->getEqLogic_id());
             $on->setConfiguration('updateCmdToValue', 1);
             $on->setValue($onoff_state->getId());
-            $on->setOrder(1);
             $on->save();
         }
 
@@ -427,7 +426,6 @@ class melcloud extends eqLogic
             $off->setConfiguration('updateCmdId', $onoff_state->getEqLogic_id());
             $off->setConfiguration('updateCmdToValue', 0);
             $off->setValue($onoff_state->getId());
-            $on->setOrder(2);
             $off->save();
         }
 
@@ -463,6 +461,7 @@ class melcloud extends eqLogic
             //$mode->setDisplay('slider_placeholder', 'Chaud : 1 Seche : 2 Rafraichir : 3 Ventilation : 7 Auto :');
             $mode->setIsHistorized(0);
             $mode->setIsVisible(1);
+            $mode->setValue(-1);
             $mode->save();
         }
 
