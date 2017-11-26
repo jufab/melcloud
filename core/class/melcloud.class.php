@@ -456,8 +456,8 @@ class melcloud extends eqLogic
             $mode->setName('Mode');
             $mode->setEqLogic_id($this->getId());
             $mode->setLogicalId('OperationMode');
-            $mode->setType('action');
-            $mode->setSubType('message');
+            $mode->setType('info');
+            $mode->setSubType('numeric');
             $mode->setTemplate('dashboard', 'ModePAC');
             $mode->setTemplate('mobile', 'ModePAC');
             //$mode->setConfiguration('listValue', '1|Chaud;2|Seche;3|Rafraichir;7|Ventilation;8|Auto');
