@@ -95,31 +95,31 @@
 
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #chaud').click(function() {
             removeSelected();
-            modePAC=1;
+            modePAC='1';
             addSelected();
             jeedom.cmd.execute({id: '#id#', value: {message: 1}, notify:true});
         });
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #froid').click(function() {
             removeSelected();
-            modePAC=2;
+            modePAC='2';
             addSelected();
             jeedom.cmd.execute({id: '#id#', value: {message: 2}, notify:true});
         });
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #rafraichir').click(function() {
             removeSelected();
-            modePAC=3;
+            modePAC='3';
             addSelected();
             jeedom.cmd.execute({id: '#id#', value: {message: 3}, notify:true});
         });
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #ventilation').click(function() {
             removeSelected();
-            modePAC=7;
+            modePAC='7';
             addSelected();
             jeedom.cmd.execute({id: '#id#', value: {message: 7}, notify:true});
         });
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #auto').click(function() {
             removeSelected();
-            modePAC=8;
+            modePAC='8';
             addSelected();
             jeedom.cmd.execute({id: '#id#', value: {message: 8}, notify:true});
         });
