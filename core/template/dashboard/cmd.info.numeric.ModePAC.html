@@ -1,4 +1,4 @@
-<div class="cmd tooltips cmd-widget modePAC#id#" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#">
+<div class="cmd tooltips cmd cmd-widget modePAC#id#" data-type="info" data-subtype="message" data-cmd_id="#id#" data-cmd_uid="#uid#">
     <!-- La partie CSS -->
 
     <style>
@@ -110,14 +110,24 @@
                     break;
             }
         }
-        $('.cmd[data-cmd_id=#id#] .modeListe#id# #chaud').click(miseAJourCommande(1));
-        $('.cmd[data-cmd_id=#id#] .modeListe#id# #froid').click(miseAJourCommande(2));
-        $('.cmd[data-cmd_id=#id#] .modeListe#id# #rafraichir').click(miseAJourCommande(3));
-        $('.cmd[data-cmd_id=#id#] .modeListe#id# #ventilation').click(miseAJourCommande(7));
-        $('.cmd[data-cmd_id=#id#] .modeListe#id# #auto').click(miseAJourCommande(8));
+        $('.cmd[data-cmd_id=#id#] .modeListe#id# #chaud').click(function() {
+            jeedom.cmd.execute({id: '#id#', value: {message: 1}});
+        });
+        $('.cmd[data-cmd_id=#id#] .modeListe#id# #froid').click(function() {
+            jeedom.cmd.execute({id: '#id#', value: {message: 2}});
+        });
+        $('.cmd[data-cmd_id=#id#] .modeListe#id# #rafraichir').click(function() {
+            jeedom.cmd.execute({id: '#id#', value: {message: 3}});
+        });
+        $('.cmd[data-cmd_id=#id#] .modeListe#id# #ventilation').click(function() {
+            jeedom.cmd.execute({id: '#id#', value: {message: 7}});
+        });
+        $('.cmd[data-cmd_id=#id#] .modeListe#id# #auto').click(function() {
+            jeedom.cmd.execute({id: '#id#', value: {message: 8}});
+        });
 
-        function miseAJourCommande(valeur) {
+        /*function miseAJourCommande(valeur) {
             jeedom.cmd.execute({id: '#id#', value: {message: valeur}});
-        }
+        }*/
     </script>
 </div>
