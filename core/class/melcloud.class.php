@@ -467,7 +467,6 @@ class melcloud extends eqLogic
             $mode->setIsVisible(1);
             $mode->setValue($this->getId());
             $mode->save();
-            $mode->event(0);
         }
 
         $actualFanSpeed = $this->getCmd(null, 'ActualFanSpeed');
@@ -598,8 +597,8 @@ class melcloudCmd extends cmd
 
         if ('OperationMode' == $this->logicalId) {
             log::add('melcloud', 'debug', 'Option pour OperationMode : '.var_export($_options,true));
-            if (isset($_options['message'])) {
-                melcloud::SetMode($_options['message'], $this->getEqLogic());
+            if (isset($_options['mode'])) {
+                melcloud::SetMode($_options['mode'], $this->getEqLogic());
             }
         }
         if ('refresh' == $this->logicalId) {
