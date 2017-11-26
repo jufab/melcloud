@@ -590,7 +590,7 @@ class melcloudCmd extends cmd
             }
         }
 
-        if ('Mode' == $this->logicalId) {
+        if ('OperationMode' == $this->logicalId) {
             if (isset($_options['slider']) && isset($_options['auto']) == false) {
                 melcloud::SetMode($_options['slider'], $this->getEqLogic());
             }
