@@ -1,4 +1,4 @@
-<div class="cmd container-fluid tooltips cmd cmd-widget modePAC#id#" data-type="info" data-subtype="numeric" data-cmd_id="#id#">
+<div class="cmd container-fluid tooltips cmd cmd-widget modePAC#id#" data-type="action" data-subtype="numeric" data-cmd_id="#id#">
     <!-- La partie CSS -->
 
     <style>
@@ -27,7 +27,7 @@
             width: 35px;
             background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') 0 -35px;
         }
-        .modeListe#id# #froid i:hover {
+        .modeListe#id# #froid .selected i:hover {
             left: 0px;
             width: 35px;
             background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') 0 0;
@@ -37,7 +37,7 @@
             width: 35px;
             background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') -35px -35px;
         }
-        .modeListe#id# #sechage i:hover{
+        .modeListe#id# #sechage .selected i:hover{
             left: 35px;
             width: 35px;
             background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') -35px 0;
@@ -47,7 +47,7 @@
             width: 35px;
             background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') -70px -35px;
         }
-        .modeListe#id# #ventilation i:hover{
+        .modeListe#id# #ventilation .selected i:hover{
             left: 70px;
             width: 35px;
             background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') -70px 0;
@@ -57,7 +57,7 @@
             width: 35px;
             background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') -105px -35px;
         }
-        .modeListe#id# #chaud i:hover{
+        .modeListe#id# #chaud .selected i:hover{
             left: 105px;
             width: 35px;
             background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') -105px 0;
@@ -67,7 +67,7 @@
             width: 35px;
             background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') -140px -35px;
         }
-        .modeListe#id# #auto i:hover{
+        .modeListe#id# #auto .selected i:hover{
             left: 140px;
             width: 35px;
             background: url('plugins/melcloud/core/template/dashboard/cmd.action.other.ModePAC/modePAC.png') -140px 0;
@@ -89,22 +89,40 @@
 
     <!-- la partie script -->
     <script>
-        var modePAC = #state#;//OperationMode 1(chaud)-2(froid)-3(rafraichir)-7(ventilation)-8(auto)
-
-
-        /*
-                $('.iconCmd#id#').empty();
-                if (weatherValue != null) {
-                    if (weatherValue.Icon != '') {
-                        $('.iconCmd#id#').attr('src', 'https://app.melcloud.com/css/weather/' + weatherValue.Icon + '.png');
-                    }
-                    if (weatherValue.ConditionName != '') {
-                        $('.iconCmd#id#').attr('alt', weatherValue.ConditionName);
-                        $('.tempExt#id#').append('<span style="margin-left: 5px;font-size: 0.8em;">' + weatherValue.ConditionName + '</span><br>');
-                    }
-                    if (weatherValue.Temperature != '' && weatherValue.Humidity != '') {
-                        $('.tempExt#id#').append('<span style="margin-left: 5px;font-size: 0.8em;">' + weatherValue.Temperature + ' °C / ' + weatherValue.Humidity + ' %</span>');
-                    }
-                }*/
+        var modePAC = '#state#';//OperationMode 1(chaud)-2(froid)-3(rafraichir)-7(ventilation)-8(auto)
+        if(modePAC!='') {
+            switch(modePAC) {
+                case '1':
+                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #chaud').addClass( "selected" );
+                    break;
+                case '2':
+                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #froid').addClass( "selected" );
+                    break;
+                case '3':
+                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #rafraichir').addClass( "selected" );
+                    break;
+                case '7':
+                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #ventilation').addClass( "selected" );
+                    break;
+                case '8':
+                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #auto').addClass( "selected" );
+                    break;
+            }
+        }
+        $('.cmd[data-cmd_id=#id#] .modeListe#id# #chaud').click(function() {
+            jeedom.cmd.execute({id: '#id#', value: {slider: 1}});
+        });
+        $('.cmd[data-cmd_id=#id#] .modeListe#id# #froid').click(function() {
+            jeedom.cmd.execute({id: '#id#', value: {slider: 2}});
+        });
+        $('.cmd[data-cmd_id=#id#] .modeListe#id# #rafraichir').click(function() {
+            jeedom.cmd.execute({id: '#id#', value: {slider: 3}});
+        });
+        $('.cmd[data-cmd_id=#id#] .modeListe#id# #ventilation').click(function() {
+            jeedom.cmd.execute({id: '#id#', value: {slider: 7}});
+        });
+        $('.cmd[data-cmd_id=#id#] .modeListe#id# #auto').click(function() {
+            jeedom.cmd.execute({id: '#id#', value: {slider: 8}});
+        });
     </script>
 </div>
