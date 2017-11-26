@@ -266,8 +266,14 @@ class melcloud extends eqLogic
                         case 'CurrentWeather':
                             log::add('melcloud', 'debug', 'log ' . $cmd->getLogicalId() . ' : On ne traite pas cette commande');
                             break;
+                        case 'OperationModeValue':
+                            log::add('melcloud', 'debug', 'log pour le OperationModeValue ' . $cmd->getLogicalId() . ' ' . $device['Device']['OperationMode']);
+                            $cmd->setCollectDate('');
+                            $cmd->event($device['Device']['OperationMode']);
+                            $cmd->save();
+                            break;
                         case 'FanSpeed':
-                            log::add('melcloud', 'debug', 'log pour le FanSpeed' . $cmd->getLogicalId() . ' ' . $device['Device'][$cmd->getLogicalId()]);
+                            log::add('melcloud', 'debug', 'log pour le FanSpeed ' . $cmd->getLogicalId() . ' ' . $device['Device'][$cmd->getLogicalId()]);
                             $cmd->setConfiguration('maxValue', $device['Device']['NumberOfFanSpeeds']);
                             //on break pas exprès pour le default!
                         default:
@@ -451,6 +457,19 @@ class melcloud extends eqLogic
         }
 
         //TODO faire un state comme le onOff pour avoir la valeur numerique et remettre en action celui-ci
+        $mode_value = $this->getCmd(null, 'OperationModeValue');
+        if (!is_object($mode_value)) {
+            $mode_value = new melcloudCmd();
+            $mode_value->setName('Valeur de Mode');
+            $mode_value->setEqLogic_id($this->getId());
+            $mode_value->setLogicalId('OperationModeValue');
+            $mode_value->setType('info');
+            $mode_value->setSubType('numeric');
+            $mode_value->setIsHistorized(0);
+            $mode_value->setIsVisible(0);
+            $mode_value->save();
+        }
+
         $mode = $this->getCmd(null, 'OperationMode');
         if (!is_object($mode)) {
             $mode = new melcloudCmd();
@@ -465,6 +484,7 @@ class melcloud extends eqLogic
             //$mode->setDisplay('slider_placeholder', 'Chaud : 1 Seche : 2 Rafraichir : 3 Ventilation : 7 Auto :');
             $mode->setIsHistorized(0);
             $mode->setIsVisible(1);
+            $mode->setValue($mode_value);
             $mode->save();
         }
 
