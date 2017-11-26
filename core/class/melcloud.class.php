@@ -354,8 +354,8 @@ class melcloud extends eqLogic
             $RoomTemperature->setIsHistorized(0);
             $RoomTemperature->setIsVisible(1);
             $RoomTemperature->setUnite('°C');
+            $RoomTemperature->setValue($this->getId());
             $RoomTemperature->save();
-            $RoomTemperature->setValue(0);
             $RoomTemperature->event(0);
         }
 
@@ -461,8 +461,9 @@ class melcloud extends eqLogic
             //$mode->setDisplay('slider_placeholder', 'Chaud : 1 Seche : 2 Rafraichir : 3 Ventilation : 7 Auto :');
             $mode->setIsHistorized(0);
             $mode->setIsVisible(1);
-            $mode->setValue(0);
+            $mode->setValue($this->getId());
             $mode->save();
+            $mode->event(0);
         }
 
         $actualFanSpeed = $this->getCmd(null, 'ActualFanSpeed');
