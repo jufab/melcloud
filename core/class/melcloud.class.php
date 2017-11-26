@@ -484,7 +484,7 @@ class melcloud extends eqLogic
             //$mode->setDisplay('slider_placeholder', 'Chaud : 1 Seche : 2 Rafraichir : 3 Ventilation : 7 Auto :');
             $mode->setIsHistorized(0);
             $mode->setIsVisible(1);
-            $mode->setValue($mode_value);
+            $mode->setValue($mode_value->getId());
             $mode->save();
         }
 
