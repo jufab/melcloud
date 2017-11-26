@@ -1,4 +1,4 @@
-<div class="cmd container-fluid tooltips cmd cmd-widget modePAC#id#" data-type="action" data-subtype="numeric" data-cmd_id="#id#">
+<div class="cmd container-fluid tooltips cmd cmd-widget modePAC#id#" data-type="action" data-subtype="message" data-cmd_id="#id#">
     <!-- La partie CSS -->
 
     <style>
@@ -89,7 +89,8 @@
 
     <!-- la partie script -->
     <script>
-        var modePAC = '#state#';//OperationMode 1(chaud)-2(froid)-3(rafraichir)-7(ventilation)-8(auto)
+        var modePAC = '#state#';
+        //OperationMode 1(chaud)-2(froid)-3(rafraichir)-7(ventilation)-8(auto)
         if(modePAC!='') {
             switch(modePAC) {
                 case '1':
@@ -110,19 +111,19 @@
             }
         }
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #chaud').click(function() {
-            jeedom.cmd.execute({id: '#id#', value: {slider: 1}});
+            jeedom.cmd.execute({id: '#id#', value: {message: 1}});
         });
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #froid').click(function() {
-            jeedom.cmd.execute({id: '#id#', value: {slider: 2}});
+            jeedom.cmd.execute({id: '#id#', value: {message: 2}});
         });
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #rafraichir').click(function() {
-            jeedom.cmd.execute({id: '#id#', value: {slider: 3}});
+            jeedom.cmd.execute({id: '#id#', value: {message: 3}});
         });
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #ventilation').click(function() {
-            jeedom.cmd.execute({id: '#id#', value: {slider: 7}});
+            jeedom.cmd.execute({id: '#id#', value: {message: 7}});
         });
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #auto').click(function() {
-            jeedom.cmd.execute({id: '#id#', value: {slider: 8}});
+            jeedom.cmd.execute({id: '#id#', value: {message: 8}});
         });
     </script>
 </div>

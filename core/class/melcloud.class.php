@@ -132,7 +132,7 @@ class melcloud extends eqLogic
 
     public static function SetMode($newmode, $mylogical)
     {
-        log::add('melcloud', 'debug', 'SetMode' . $newmode);
+        log::add('melcloud', 'debug', 'SetMode ' . $newmode);
         $montoken = config::byKey('MyToken', 'melcloud', '');
         if ($montoken != '') {
             $devideid = $mylogical->getConfiguration('deviceid');
@@ -592,8 +592,8 @@ class melcloudCmd extends cmd
         }
 
         if ('OperationMode' == $this->logicalId) {
-            if (isset($_options['slider']) && isset($_options['auto']) == false) {
-                melcloud::SetMode($_options['slider'], $this->getEqLogic());
+            if (isset($_options['message']) && isset($_options['auto']) == false) {
+                melcloud::SetMode($_options['message'], $this->getEqLogic());
             }
         }
         if ('refresh' == $this->logicalId) {
