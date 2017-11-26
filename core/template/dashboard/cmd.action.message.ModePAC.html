@@ -1,4 +1,4 @@
-<div class="cmd tooltips cmd cmd-widget modePAC#id#" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#">
+<div class="cmd tooltips cmd cmd-widget modePAC#id#" data-type="action" data-subtype="message" data-cmd_id="#id#" data-cmd_uid="#uid#">
     <!-- La partie CSS -->
 
     <style>
@@ -25,52 +25,52 @@
         .modeListe#id# #froid {
             left: 0px;
             width: 35px;
-            background: url('plugins/melcloud/core/template/dashboard/cmd.info.numeric.ModePAC/modePAC.png') 0 -35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.message.ModePAC/modePAC.png') 0 -35px;
         }
         .modeListe#id# #froid .selected, .modeListe#id# #froid i:hover {
             left: 0px;
             width: 35px;
-            background: url('plugins/melcloud/core/template/dashboard/cmd.info.numeric.ModePAC/modePAC.png') 0 0;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.message.ModePAC/modePAC.png') 0 0;
         }
         .modeListe#id# #sechage {
             left: 35px;
             width: 35px;
-            background: url('plugins/melcloud/core/template/dashboard/cmd.info.numeric.ModePAC/modePAC.png') -35px -35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.message.ModePAC/modePAC.png') -35px -35px;
         }
         .modeListe#id# #sechage .selected, .modeListe#id# #sechage i:hover{
             left: 35px;
             width: 35px;
-            background: url('plugins/melcloud/core/template/dashboard/cmd.info.numeric.ModePAC/modePAC.png') -35px 0;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.message.ModePAC/modePAC.png') -35px 0;
         }
         .modeListe#id# #ventilation {
             left: 70px;
             width: 35px;
-            background: url('plugins/melcloud/core/template/dashboard/cmd.info.numeric.ModePAC/modePAC.png') -70px -35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.message.ModePAC/modePAC.png') -70px -35px;
         }
         .modeListe#id# #ventilation .selected, .modeListe#id# #ventilation i:hover{
             left: 70px;
             width: 35px;
-            background: url('plugins/melcloud/core/template/dashboard/cmd.info.numeric.ModePAC/modePAC.png') -70px 0;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.message.ModePAC/modePAC.png') -70px 0;
         }
         .modeListe#id# #chaud {
             left: 105px;
             width: 35px;
-            background: url('plugins/melcloud/core/template/dashboard/cmd.info.numeric.ModePAC/modePAC.png') -105px -35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.message.ModePAC/modePAC.png') -105px -35px;
         }
         .modeListe#id# #chaud .selected, .modeListe#id# #chaud i:hover{
             left: 105px;
             width: 35px;
-            background: url('plugins/melcloud/core/template/dashboard/cmd.info.numeric.ModePAC/modePAC.png') -105px 0;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.message.ModePAC/modePAC.png') -105px 0;
         }
         .modeListe#id# #auto {
             left: 140px;
             width: 35px;
-            background: url('plugins/melcloud/core/template/dashboard/cmd.info.numeric.ModePAC/modePAC.png') -140px -35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.message.ModePAC/modePAC.png') -140px -35px;
         }
         .modeListe#id# #auto .selected, .modeListe#id# #auto i:hover{
             left: 140px;
             width: 35px;
-            background: url('plugins/melcloud/core/template/dashboard/cmd.info.numeric.ModePAC/modePAC.png') -140px 0;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.message.ModePAC/modePAC.png') -140px 0;
         }
     </style>
 
@@ -111,19 +111,19 @@
             }
         }
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #chaud').click(function() {
-            jeedom.cmd.execute({id: '#id#', value: {mode: 1}, notify:true});
+            jeedom.cmd.execute({id: '#id#', value: {message: 1}, notify:true});
         });
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #froid').click(function() {
-            jeedom.cmd.execute({id: '#id#', value: {mode: 2}, notify:true});
+            jeedom.cmd.execute({id: '#id#', value: {message: 2}, notify:true});
         });
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #rafraichir').click(function() {
-            jeedom.cmd.execute({id: '#id#', value: {mode: 3}, notify:true});
+            jeedom.cmd.execute({id: '#id#', value: {message: 3}, notify:true});
         });
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #ventilation').click(function() {
-            jeedom.cmd.execute({id: '#id#', value: {mode: 7}, notify:true});
+            jeedom.cmd.execute({id: '#id#', value: {message: 7}, notify:true});
         });
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #auto').click(function() {
-            jeedom.cmd.execute({id: '#id#', value: {mode: 8}, notify:true});
+            jeedom.cmd.execute({id: '#id#', value: {message: 8}, notify:true});
         });
 
         /*function miseAJourCommande(valeur) {
