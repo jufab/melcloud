@@ -1,28 +1,28 @@
 <div class="cmd tooltips cmd-widget cursor OnOffLight#id#" style="width:38px;" data-type="action" data-cmd_id="#id#">
-    <center>
-        <span style="font-size: 2.5em;" class="action_OnOffLight#id#" id="iconCmd#id#"></span>
-    </center>
+    <!-- la partie html -->
+    <p class='cmdName' style="font-weight: bold;font-size : 12px;">#name#</p>
+    <span class="action_OnOffLight#id#" id="iconCmd#id#"></span>
     <style>
         div.OnOffLight#id# {
             margin-top : 0px;
-            min-height:37px;
-            min-width: 38px;
+            min-height:35px;
+            min-width: 35px;
         }
         img.OnOffLight#id# {
-            width: 38px;
-            height: 37px;
+            width: 35px;
+            height: 35px;
         }
     </style>
     <script>
         if (jeedom.cmd.normalizeName('#name#') == 'on') {
-            $('#iconCmd#id#').append('<img src="plugins/melcloud/core/template/dashboard/cmd.action.other.OnOffLight/onoff_off.png" class="OnOffLight#id#" />');
+            $('#iconCmd#id#').append('<img src="plugins/melcloud/core/template/dashboard/cmd.action.other.OnOffLight/power_off.png" class="OnOffLight#id#" />');
             if ('#state#' != 0) {
                 $('.cmd[data-cmd_id=#id#]').hide();
             }
 
         }
         if (jeedom.cmd.normalizeName('#name#') == 'off') {
-            $('#iconCmd#id#').append('<img src="plugins/melcloud/core/template/dashboard/cmd.action.other.OnOffLight/onoff_on.png" class="OnOffLight#id#"/>');
+            $('#iconCmd#id#').append('<img src="plugins/melcloud/core/template/dashboard/cmd.action.other.OnOffLight/power_on.png" class="OnOffLight#id#"/>');
 
             if ('#state#' == 0) {
                 $('.cmd[data-cmd_id=#id#]').hide();
