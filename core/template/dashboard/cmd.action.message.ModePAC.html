@@ -91,7 +91,7 @@
     <script>
         var correspondance =  {'1':'chaud','2':'froid','3':'rafraichir','7':'ventilation','8':'auto'};
         var modePAC = '#state#';
-        addSelected();
+        doitAjouterLaClasseSelected(true);
         //OperationMode 1(chaud)-2(froid)-3(rafraichir)-7(ventilation)-8(auto)
         $.each( correspondance, function( key, value ) {
             $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+value).click(function() {
