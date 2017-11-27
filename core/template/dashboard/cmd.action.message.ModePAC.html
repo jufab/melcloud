@@ -89,83 +89,57 @@
 
     <!-- la partie script -->
     <script>
+        var correspondance =  {'1':'chaud','2':'froid','3':'rafraichir','7':'ventilation','8':'auto'};
         var modePAC = '#state#';
         addSelected();
         //OperationMode 1(chaud)-2(froid)-3(rafraichir)-7(ventilation)-8(auto)
-
-        $('.cmd[data-cmd_id=#id#] .modeListe#id# #chaud').click(function() {
-            removeSelected();
-            modePAC='1';
-            addSelected();
-            jeedom.cmd.execute({id: '#id#', value: {message: 1}, notify:true});
-        });
-        $('.cmd[data-cmd_id=#id#] .modeListe#id# #froid').click(function() {
-            removeSelected();
-            modePAC='2';
-            addSelected();
-            jeedom.cmd.execute({id: '#id#', value: {message: 2}, notify:true});
-        });
-        $('.cmd[data-cmd_id=#id#] .modeListe#id# #rafraichir').click(function() {
-            removeSelected();
-            modePAC='3';
-            addSelected();
-            jeedom.cmd.execute({id: '#id#', value: {message: 3}, notify:true});
-        });
-        $('.cmd[data-cmd_id=#id#] .modeListe#id# #ventilation').click(function() {
-            removeSelected();
-            modePAC='7';
-            addSelected();
-            jeedom.cmd.execute({id: '#id#', value: {message: 7}, notify:true});
-        });
-        $('.cmd[data-cmd_id=#id#] .modeListe#id# #auto').click(function() {
-            removeSelected();
-            modePAC='8';
-            addSelected();
-            jeedom.cmd.execute({id: '#id#', value: {message: 8}, notify:true});
+        $.each( correspondance, function( key, value ) {
+            $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+value).click(function() {
+                doitAjouterLaClasseSelected(false);
+                modePAC=key;
+                doitAjouterLaClasseSelected(true);
+                jeedom.cmd.execute({id: '#id#', value: {message: parseInt(key)}, notify:true});
+            });
         });
 
-        function addSelected() {
+        function doitAjouterLaClasseSelected(isToAddClassSelected) {
             switch(modePAC) {
                 case '1':
-                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #chaud i').addClass( "selected" );
+                    if(isToAddClassSelected) {
+                        $('.cmd[data-cmd_id=#id#] .modeListe#id# #chaud i').addClass("selected");
+                    } else {
+                        $('.cmd[data-cmd_id=#id#] .modeListe#id# #chaud i').removeClass("selected");
+                    }
                     break;
                 case '2':
-                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #froid i').addClass( "selected" );
+                    if(isToAddClassSelected) {
+                        $('.cmd[data-cmd_id=#id#] .modeListe#id# #froid i').addClass("selected");
+                    } else {
+                        $('.cmd[data-cmd_id=#id#] .modeListe#id# #froid i').removeClass("selected");
+                    }
                     break;
                 case '3':
-                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #rafraichir i').addClass( "selected" );
+                    if(isToAddClassSelected) {
+                        $('.cmd[data-cmd_id=#id#] .modeListe#id# #rafraichir i').addClass("selected");
+                    } else {
+                        $('.cmd[data-cmd_id=#id#] .modeListe#id# #rafraichir i').removeClass("selected");
+                    }
                     break;
                 case '7':
-                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #ventilation i').addClass( "selected" );
+                    if (isToAddClassSelected) {
+                        $('.cmd[data-cmd_id=#id#] .modeListe#id# #ventilation i').addClass("selected");
+                    } else {
+                        $('.cmd[data-cmd_id=#id#] .modeListe#id# #ventilation i').removeClass("selected");
+                    }
                     break;
                 case '8':
-                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #auto i').addClass( "selected" );
+                    if (isToAddClassSelected) {
+                        $('.cmd[data-cmd_id=#id#] .modeListe#id# #auto i').addClass("selected");
+                    } else {
+                        $('.cmd[data-cmd_id=#id#] .modeListe#id# #auto i').removeClass("selected");
+                    }
                     break;
             }
         }
-
-        function removeSelected() {
-            switch(modePAC) {
-                case '1':
-                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #chaud i').removeClass( "selected" );
-                    break;
-                case '2':
-                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #froid i').removeClass( "selected" );
-                    break;
-                case '3':
-                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #rafraichir i').removeClass( "selected" );
-                    break;
-                case '7':
-                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #ventilation i').removeClass( "selected" );
-                    break;
-                case '8':
-                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #auto i').removeClass( "selected" );
-                    break;
-            }
-        }
-
-        /*function miseAJourCommande(valeur) {
-            jeedom.cmd.execute({id: '#id#', value: {message: valeur}});
-        }*/
     </script>
 </div>

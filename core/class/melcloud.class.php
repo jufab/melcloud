@@ -350,43 +350,6 @@ class melcloud extends eqLogic
             if ($this->getConfiguration('deviceid') == '') return;
         }
 
-        $RoomTemperature = $this->getCmd(null, 'RoomTemperature');
-        if (!is_object($RoomTemperature)) {
-            $RoomTemperature = new melcloudCmd();
-            $RoomTemperature->setName('Température');
-            $RoomTemperature->setEqLogic_id($this->getId());
-            $RoomTemperature->setLogicalId('RoomTemperature');
-            $RoomTemperature->setType('info');
-            $RoomTemperature->setSubType('numeric');
-            $RoomTemperature->setTemplate('dashboard', 'thermometreIMG');
-            $RoomTemperature->setTemplate('mobile', 'tempIMG');
-            $RoomTemperature->setIsHistorized(0);
-            $RoomTemperature->setIsVisible(1);
-            $RoomTemperature->setUnite('°C');
-            $RoomTemperature->setValue($this->getId());
-            $RoomTemperature->save();
-            $RoomTemperature->event(0);
-        }
-
-        $Consigne = $this->getCmd(null, 'SetTemperature');
-        if (!is_object($Consigne)) {
-            $Consigne = new melcloudCmd();
-            $Consigne->setName('Consigne');
-            $Consigne->setEqLogic_id($this->getId());
-            $Consigne->setLogicalId('SetTemperature');
-            $Consigne->setType('action');
-            $Consigne->setTemplate('dashboard', 'thermostat');
-            $Consigne->setSubType('slider');
-            $Consigne->setIsHistorized(0);
-            $Consigne->setUnite('°C');
-            $Consigne->setIsVisible(1);
-            $Consigne->setDisplay('slider_placeholder', 'Temperature en °c ex');
-            $Consigne->setConfiguration('maxValue', 30);
-            $Consigne->setConfiguration('minValue', 10);
-            $Consigne->save();
-        }
-
-
         $onoff_state = $this->getCmd(null, 'Power');
         if (!is_object($onoff_state)) {
             $onoff_state = new melcloudCmd();
@@ -438,25 +401,6 @@ class melcloud extends eqLogic
             $off->save();
         }
 
-        $ventilation = $this->getCmd(null, 'FanSpeed');
-        if (!is_object($ventilation)) {
-            $ventilation = new melcloudCmd();
-            $ventilation->setName('Ventilation');
-            $ventilation->setEqLogic_id($this->getId());
-            $ventilation->setLogicalId('FanSpeed');
-            $ventilation->setType('action');
-            $ventilation->setSubType('slider');
-            $ventilation->setIsHistorized(0);
-            //$ventilation->setConfiguration('listValue','0|Automatique;1|Vitesse 1;2|Vitesse 2;3|Vitesse 3;4|Vitesse 4;5|Vitesse 5');
-            //$ventilation->setDisplay('slider_placeholder', '0 = automatique, 1 a 5 manuel');
-            $ventilation->setTemplate('dashboard', 'button');
-            $ventilation->setIsVisible(0);
-            $ventilation->setConfiguration('maxValue', 5);
-            $ventilation->setConfiguration('minValue', 0);
-            $ventilation->save();
-        }
-
-        //TODO faire un state comme le onOff pour avoir la valeur numerique et remettre en action celui-ci
         $mode_value = $this->getCmd(null, 'OperationModeValue');
         if (!is_object($mode_value)) {
             $mode_value = new melcloudCmd();
@@ -488,6 +432,61 @@ class melcloud extends eqLogic
             $mode->save();
         }
 
+
+        $Consigne = $this->getCmd(null, 'SetTemperature');
+        if (!is_object($Consigne)) {
+            $Consigne = new melcloudCmd();
+            $Consigne->setName('Consigne');
+            $Consigne->setEqLogic_id($this->getId());
+            $Consigne->setLogicalId('SetTemperature');
+            $Consigne->setType('action');
+            $Consigne->setTemplate('dashboard', 'thermostat');
+            $Consigne->setSubType('slider');
+            $Consigne->setIsHistorized(0);
+            $Consigne->setUnite('°C');
+            $Consigne->setIsVisible(1);
+            $Consigne->setDisplay('slider_placeholder', 'Temperature en °c ex');
+            $Consigne->setConfiguration('maxValue', 30);
+            $Consigne->setConfiguration('minValue', 10);
+            $Consigne->save();
+        }
+
+        $ventilation = $this->getCmd(null, 'FanSpeed');
+        if (!is_object($ventilation)) {
+            $ventilation = new melcloudCmd();
+            $ventilation->setName('Ventilation');
+            $ventilation->setEqLogic_id($this->getId());
+            $ventilation->setLogicalId('FanSpeed');
+            $ventilation->setType('action');
+            $ventilation->setSubType('slider');
+            $ventilation->setIsHistorized(0);
+            //$ventilation->setConfiguration('listValue','0|Automatique;1|Vitesse 1;2|Vitesse 2;3|Vitesse 3;4|Vitesse 4;5|Vitesse 5');
+            //$ventilation->setDisplay('slider_placeholder', '0 = automatique, 1 a 5 manuel');
+            $ventilation->setTemplate('dashboard', 'button');
+            $ventilation->setIsVisible(0);
+            $ventilation->setConfiguration('maxValue', 5);
+            $ventilation->setConfiguration('minValue', 0);
+            $ventilation->save();
+        }
+
+        $RoomTemperature = $this->getCmd(null, 'RoomTemperature');
+        if (!is_object($RoomTemperature)) {
+            $RoomTemperature = new melcloudCmd();
+            $RoomTemperature->setName('Température');
+            $RoomTemperature->setEqLogic_id($this->getId());
+            $RoomTemperature->setLogicalId('RoomTemperature');
+            $RoomTemperature->setType('info');
+            $RoomTemperature->setSubType('numeric');
+            $RoomTemperature->setTemplate('dashboard', 'thermometreIMG');
+            $RoomTemperature->setTemplate('mobile', 'tempIMG');
+            $RoomTemperature->setIsHistorized(0);
+            $RoomTemperature->setIsVisible(1);
+            $RoomTemperature->setUnite('°C');
+            $RoomTemperature->setValue($this->getId());
+            $RoomTemperature->save();
+            $RoomTemperature->event(0);
+        }
+
         $actualFanSpeed = $this->getCmd(null, 'ActualFanSpeed');
         if (!is_object($actualFanSpeed)) {
             $actualFanSpeed = new melcloudCmd();
@@ -502,19 +501,6 @@ class melcloud extends eqLogic
             $actualFanSpeed->save();
             $actualFanSpeed->setValue(0);
             $actualFanSpeed->event(0);
-        }
-
-
-        $refresh = $this->getCmd(null, 'refresh');
-        if (!is_object($refresh)) {
-            $refresh = new melcloudCmd();
-            $refresh->setLogicalId('refresh');
-            $refresh->setIsVisible(1);
-            $refresh->setName('Rafraichir');
-            $refresh->setEqLogic_id($this->getId());
-            $refresh->setType('action');
-            $refresh->setSubType('other');
-            $refresh->save();
         }
 
         $currentWeather = $this->getCmd(null, 'CurrentWeather');
@@ -533,6 +519,18 @@ class melcloud extends eqLogic
             $currentWeather->setTemplate('dashboard', 'CurrentWeather');
             $currentWeather->setTemplate('mobile', 'CurrentWeather');
             $currentWeather->save();
+        }
+
+        $refresh = $this->getCmd(null, 'refresh');
+        if (!is_object($refresh)) {
+            $refresh = new melcloudCmd();
+            $refresh->setLogicalId('refresh');
+            $refresh->setIsVisible(1);
+            $refresh->setName('Rafraichir');
+            $refresh->setEqLogic_id($this->getId());
+            $refresh->setType('action');
+            $refresh->setSubType('other');
+            $refresh->save();
         }
     }
 
