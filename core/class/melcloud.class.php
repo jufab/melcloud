@@ -269,7 +269,7 @@ class melcloud extends eqLogic
                         case 'OperationModeValue':
                         case 'SetTemperatureValue':
                             $operation = $cmd->getLogicalId().substr_replace("Value","");
-                            log::add('melcloud', 'debug', 'log de  ' . $cmd->getLogicalId() . ' ' . $device['Device'][$operation]);
+                            log::add('melcloud', 'debug', 'log de ' . $cmd->getLogicalId() . ' avec l\'operation ' . $operation . ' et la valeur' . $device['Device'][$operation]);
                             $cmd->setCollectDate('');
                             $cmd->event($device['Device'][$operation]);
                             $cmd->save();
