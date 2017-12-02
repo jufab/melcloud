@@ -268,7 +268,7 @@ class melcloud extends eqLogic
                             break;
                         case 'OperationModeValue':
                         case 'SetTemperatureValue':
-                            $operation = $cmd->getLogicalId().substr_replace("Value","");
+                            $operation = str_replace("Value","",$cmd->getLogicalId());
                             log::add('melcloud', 'debug', 'log de ' . $cmd->getLogicalId() . ' avec l\'operation ' . $operation . ' et la valeur' . $device['Device'][$operation]);
                             $cmd->setCollectDate('');
                             $cmd->event($device['Device'][$operation]);
