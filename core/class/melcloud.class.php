@@ -267,9 +267,11 @@ class melcloud extends eqLogic
                             log::add('melcloud', 'debug', 'log ' . $cmd->getLogicalId() . ' : On ne traite pas cette commande');
                             break;
                         case 'OperationModeValue':
-                            log::add('melcloud', 'debug', 'log pour le OperationModeValue ' . $cmd->getLogicalId() . ' ' . $device['Device']['OperationMode']);
+                        case 'SetTemperatureValue':
+                            var $operation = $cmd->getLogicalId().substr_replace("Value","");
+                            log::add('melcloud', 'debug', 'log de  ' . $cmd->getLogicalId() . ' ' . $device['Device'][$operation]);
                             $cmd->setCollectDate('');
-                            $cmd->event($device['Device']['OperationMode']);
+                            $cmd->event($device['Device'][$operation]);
                             $cmd->save();
                             break;
                         case 'FanSpeed':
