@@ -432,23 +432,37 @@ class melcloud extends eqLogic
             $mode->save();
         }
 
+        $consigne_value = $this->getCmd(null, 'SetTemperatureValue');
+        if (!is_object($consigne_value)) {
+            $consigne_value = new melcloudCmd();
+            $consigne_value->setName('Valeur de Consigne');
+            $consigne_value->setEqLogic_id($this->getId());
+            $consigne_value->setLogicalId('SetTemperatureValue');
+            $consigne_value->setType('info');
+            $consigne_value->setSubType('numeric');
+            $consigne_value->setIsHistorized(0);
+            $consigne_value->setIsVisible(0);
+            $consigne_value->save();
+        }
 
-        $Consigne = $this->getCmd(null, 'SetTemperature');
-        if (!is_object($Consigne)) {
-            $Consigne = new melcloudCmd();
-            $Consigne->setName('Consigne');
-            $Consigne->setEqLogic_id($this->getId());
-            $Consigne->setLogicalId('SetTemperature');
-            $Consigne->setType('action');
-            $Consigne->setTemplate('dashboard', 'thermostat');
-            $Consigne->setSubType('slider');
-            $Consigne->setIsHistorized(0);
-            $Consigne->setUnite('°C');
-            $Consigne->setIsVisible(1);
-            $Consigne->setDisplay('slider_placeholder', 'Temperature en °c ex');
-            $Consigne->setConfiguration('maxValue', 30);
-            $Consigne->setConfiguration('minValue', 10);
-            $Consigne->save();
+
+        $consigne = $this->getCmd(null, 'SetTemperature');
+        if (!is_object($consigne)) {
+            $consigne = new melcloudCmd();
+            $consigne->setName('Consigne');
+            $consigne->setEqLogic_id($this->getId());
+            $consigne->setLogicalId('SetTemperature');
+            $consigne->setType('action');
+            $consigne->setSubType('slider');
+            $consigne->setTemplate('dashboard', 'consigneTemp');
+            $consigne->setIsHistorized(0);
+            $consigne->setUnite('°C');
+            $consigne->setIsVisible(1);
+            $consigne->setDisplay('slider_placeholder', 'Temperature en °c ex');
+            $consigne->setConfiguration('maxValue', 30);
+            $consigne->setConfiguration('minValue', 10);
+            $consigne->setValue($consigne_value->getId());
+            $consigne->save();
         }
 
         $ventilation = $this->getCmd(null, 'FanSpeed');
