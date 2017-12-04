@@ -274,20 +274,14 @@ class melcloud extends eqLogic
                             $cmd->event($device['Device'][$operation]);
                             $cmd->save();
                             break;
-                        case 'SetTemperature':
-                            if('1'==$device['Device']['OperationMode']) {
-                                $cmd->setConfiguration('maxValue', $device['Device']['MaxTempHeat']);
-                                $cmd->setConfiguration('minValue', $device['Device']['MinTempHeat']);
-                            } else {
-                                $cmd->setConfiguration('maxValue', $device['Device']['MaxTempCoolDry']);
-                                $cmd->setConfiguration('minValue', $device['Device']['MinTempCoolDry']);
-                            }
                         case 'FanSpeed':
                             log::add('melcloud', 'debug', 'log pour le FanSpeed ' . $cmd->getLogicalId() . ' ' . $device['Device'][$cmd->getLogicalId()]);
                             $cmd->setConfiguration('maxValue', $device['Device']['NumberOfFanSpeeds']);
                             //on break pas exprès pour le default!
                         default:
                             log::add('melcloud', 'debug', 'log ' . $cmd->getLogicalId() . ' ' . $device['Device'][$cmd->getLogicalId()]);
+                            if('SetTemperature' == $cmd->getLogicalId())
+                                self::definirMaxEtMinTemperature($cmd,$device);
                             if ('LastTimeStamp' == $cmd->getLogicalId()) {
                                 $cmd->event(str_replace('T', ' ', $device['Device'][$cmd->getLogicalId()]));
                             } else {
@@ -331,6 +325,21 @@ class melcloud extends eqLogic
             }
         }
         $mylogical->Refresh();
+    }
+
+    public static function definirMaxEtMinTemperature($cmd,$device) {
+        log::add('melcloud', 'debug', 'definir les temperatures Max et Min');
+        log::add('melcloud', 'debug', 'OperationMode : '. $device['Device']['OperationMode']);
+        log::add('melcloud', 'debug', 'MaxTempHeat : '. $device['Device']['MaxTempHeat']);
+        if('1'==$device['Device']['OperationMode']) {
+            $cmd->setConfiguration('maxValue', intval($device['Device']['MaxTempHeat']));
+            $cmd->setConfiguration('minValue', intval($device['Device']['MinTempHeat']));
+        } else {
+            $cmd->setConfiguration('maxValue', intval($device['Device']['MaxTempCoolDry']));
+            $cmd->setConfiguration('minValue',intval($device['Device']['MinTempCoolDry']));
+        }
+
+
     }
 
     //Fonction exécutée automatiquement toutes les minutes par Jeedom
