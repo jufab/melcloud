@@ -274,6 +274,14 @@ class melcloud extends eqLogic
                             $cmd->event($device['Device'][$operation]);
                             $cmd->save();
                             break;
+                        case 'SetTemperature':
+                            if('1'==$device['Device']['OperationMode']) {
+                                $cmd->setConfiguration('maxValue', $device['Device']['MaxTempHeat']);
+                                $cmd->setConfiguration('minValue', $device['Device']['MinTempHeat']);
+                            } else {
+                                $cmd->setConfiguration('maxValue', $device['Device']['MaxTempCoolDry']);
+                                $cmd->setConfiguration('minValue', $device['Device']['MinTempCoolDry']);
+                            }
                         case 'FanSpeed':
                             log::add('melcloud', 'debug', 'log pour le FanSpeed ' . $cmd->getLogicalId() . ' ' . $device['Device'][$cmd->getLogicalId()]);
                             $cmd->setConfiguration('maxValue', $device['Device']['NumberOfFanSpeeds']);
@@ -323,6 +331,11 @@ class melcloud extends eqLogic
             }
         }
         $mylogical->Refresh();
+    }
+
+    public static function definirMinMaxTempSlider($device) {
+        $consigne = $this->getCmd(null, 'SetTemperature');
+
     }
 
     //Fonction exécutée automatiquement toutes les minutes par Jeedom
