@@ -29,7 +29,6 @@
             $(".cmd[data-cmd_id=#id#] .slider").slider({
                 min: ('#minValue#' == '') ? 0 : parseInt('#minValue#'),
                 max: ('#maxValue#' == '') ? 100 : parseInt('#maxValue#'),
-                step: ('#step#' == '') ? 1 : parseFloat('#step#'),
                 value: ('#state#' == '') ? 0 : parseInt(_options.display_value),
                 create: function () {
                     handle.text($(this).slider("value") + "°C");
