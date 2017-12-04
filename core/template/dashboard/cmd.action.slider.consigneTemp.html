@@ -38,7 +38,7 @@
                     handle.text(ui.value + "°C");
                 }
             })
-        }
+        };
         jeedom.cmd.update['#id#']({display_value: '#state#'});
         $(".cmd[data-cmd_uid=#uid#] .slider").on('slidestop', function (event, ui) {
             jeedom.cmd.execute({id: '#id#', value: {slider: ui.value}});

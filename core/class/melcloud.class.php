@@ -281,7 +281,7 @@ class melcloud extends eqLogic
                         default:
                             log::add('melcloud', 'debug', 'log ' . $cmd->getLogicalId() . ' ' . $device['Device'][$cmd->getLogicalId()]);
                             if('SetTemperature' == $cmd->getLogicalId())
-                                self::definirMaxEtMinTemperature($cmd,$device);
+                                self::definirLaConfPourSliderTemperature($cmd,$device);
                             if ('LastTimeStamp' == $cmd->getLogicalId()) {
                                 $cmd->event(str_replace('T', ' ', $device['Device'][$cmd->getLogicalId()]));
                             } else {
