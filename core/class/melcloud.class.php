@@ -333,11 +333,6 @@ class melcloud extends eqLogic
         $mylogical->Refresh();
     }
 
-    public static function definirMinMaxTempSlider($device) {
-        $consigne = $this->getCmd(null, 'SetTemperature');
-
-    }
-
     //Fonction exécutée automatiquement toutes les minutes par Jeedom
     public static function cron(){}
 
