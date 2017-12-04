@@ -1,39 +1,46 @@
-<span class="cmd cmd-widget" data-type="action" data-subtype="slider" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#">
+<span class="cmd cmd-widget" data-type="action" data-subtype="slider" data-cmd_id="#id#" data-cmd_uid="#uid#"
+      data-version="#version#">
     <style>
-  #custom-handle {
-      width: 3em;
-      height: 1.6em;
-      top: 50%;
-      margin-top: -.8em;
-      text-align: center;
-      line-height: 1.6em;
-      background-color: #3f3f3f;
-      color: white;
-      font-weight: bold;
-  }
+    #custom-handle#id# {
+        width: 3em;
+        height: 1.6em;
+        top: 50%;
+        margin-top: -.8em;
+        text-align: center;
+        line-height: 1.6em;
+        background-color: #3f3f3f;
+        color: white;
+        font-weight: bold;
+    }
+
+    .cmd[data-cmd_uid=#uid#]
+    .ui-state-default {
+        cursor: pointer;
+    }
   </style>
     <div class="cmdName" style="font-weight: bold;font-size : 12px;#hideCmdName#">#name_display#</div>
     <div class="slider" style="margin : 5px 10px 8px 10px;width: 80px;top:15px;" value="#state#">
-        <div id="custom-handle" class="ui-slider-handle"></div>
+        <div id="custom-handle#id#" class="ui-slider-handle"></div>
     </div>
     <script>
-        var handle = $( "#custom-handle" );
-        $(".cmd[data-cmd_uid=#uid#] .slider.slider-horizontal").css('z-index',1);
-        jeedom.cmd.update['#id#'] = function(_options){
+        var handle = $("#custom-handle#id#");
+        $(".cmd[data-cmd_uid=#uid#] .slider.slider-horizontal").css('z-index', 1);
+        jeedom.cmd.update['#id#'] = function (_options) {
             $(".cmd[data-cmd_id=#id#] .slider").slider({
                 min: ('#minValue#' == '') ? 0 : parseInt('#minValue#'),
                 max: ('#maxValue#' == '') ? 100 : parseInt('#maxValue#'),
+                step: ('#step#' == '') ? 1 : parseFloat('#step#'),
                 value: ('#state#' == '') ? 0 : parseInt(_options.display_value),
-                create: function() {
-                    handle.text( $( this ).slider( "value" )  + "°C");
+                create: function () {
+                    handle.text($(this).slider("value") + "°C");
                 },
-                slide: function( event, ui ) {
-                    handle.text( ui.value + "°C");
+                slide: function (event, ui) {
+                    handle.text(ui.value + "°C");
                 }
             })
         }
-        jeedom.cmd.update['#id#']({display_value:'#state#'});
-        $(".cmd[data-cmd_uid=#uid#] .slider").on('slidestop', function (event,ui) {
+        jeedom.cmd.update['#id#']({display_value: '#state#'});
+        $(".cmd[data-cmd_uid=#uid#] .slider").on('slidestop', function (event, ui) {
             jeedom.cmd.execute({id: '#id#', value: {slider: ui.value}});
         });
     </script>

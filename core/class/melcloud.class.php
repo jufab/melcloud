@@ -327,10 +327,11 @@ class melcloud extends eqLogic
         $mylogical->Refresh();
     }
 
-    public static function definirMaxEtMinTemperature($cmd,$device) {
+    public static function definirLaConfPourSliderTemperature($cmd,$device) {
         log::add('melcloud', 'debug', 'definir les temperatures Max et Min');
         log::add('melcloud', 'debug', 'OperationMode : '. $device['Device']['OperationMode']);
         log::add('melcloud', 'debug', 'MaxTempHeat : '. $device['Device']['MaxTempHeat']);
+        $cmd->setConfiguration('step',floatval($device['Device']['TemperatureIncrement']));
         if('1'==$device['Device']['OperationMode']) {
             $cmd->setConfiguration('maxValue', intval($device['Device']['MaxTempHeat']));
             $cmd->setConfiguration('minValue', intval($device['Device']['MinTempHeat']));
@@ -480,6 +481,7 @@ class melcloud extends eqLogic
             $consigne->setDisplay('slider_placeholder', 'Temperature en °c ex');
             $consigne->setConfiguration('maxValue', 30);
             $consigne->setConfiguration('minValue', 10);
+            $consigne->setConfiguration('step', 1);
             $consigne->setValue($consigne_value->getId());
             $consigne->save();
         }
