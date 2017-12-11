@@ -507,7 +507,7 @@ class melcloud extends eqLogic
             $ventilation->setEqLogic_id($this->getId());
             $ventilation->setLogicalId('FanSpeed');
             $ventilation->setType('action');
-            $ventilation->setSubType('other');
+            $ventilation->setSubType('message');
             $ventilation->setIsHistorized(0);
             $ventilation->setTemplate('dashboard', 'FanSpeed');
             $ventilation->setIsVisible(1);
@@ -638,9 +638,9 @@ class melcloudCmd extends cmd
             melcloud::SetPower('false', $this->getEqLogic());
         }
 
-        if ('Ventilation' == $this->logicalId) {
-            if (isset($_options['slider']) && isset($_options['auto']) == false) {
-                melcloud::SetFan($_options['slider'], $this->getEqLogic());
+        if ('FanSpeed' == $this->logicalId) {
+            if (isset($_options['message'])) {
+                melcloud::SetFan($_options['message'], $this->getEqLogic());
             }
         }
 
