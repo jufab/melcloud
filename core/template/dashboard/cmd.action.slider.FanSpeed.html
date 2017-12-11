@@ -90,6 +90,13 @@
     <!-- la partie script -->
     <script>
         var vitesseValue = '#state#';
+        var vitesseMax = ('#maxValue#'=='') ? 5 : parseInt('#maxValue#');
+        if(vitesseMax<5) {
+            for(var i=vitesseMax+1;i<=5;i++) {
+                $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse' + i).hide();
+            }
+        }
+
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse'+vitesseValue+' i').addClass("selected");
         $('.cmd[data-cmd_id=#id#] .modeListe#id# li').each(function() {
             $(this).click(function() {

@@ -266,6 +266,7 @@ class melcloud extends eqLogic
                         case 'CurrentWeather':
                             log::add('melcloud', 'debug', 'log ' . $cmd->getLogicalId() . ' : On ne traite pas cette commande');
                             break;
+                        case 'FanSpeedValue':
                         case 'OperationModeValue':
                         case 'SetTemperatureValue':
                             $operation = str_replace("Value","",$cmd->getLogicalId());
@@ -487,12 +488,12 @@ class melcloud extends eqLogic
         }
 
 
-        $ventilation_value = $this->getCmd(null, 'ActualFanSpeed');
+        $ventilation_value = $this->getCmd(null, 'FanSpeedValue');
         if (!is_object($ventilation_value)) {
             $ventilation_value = new melcloudCmd();
             $ventilation_value->setName('Vitesse');
             $ventilation_value->setEqLogic_id($this->getId());
-            $ventilation_value->setLogicalId('ActualFanSpeed');
+            $ventilation_value->setLogicalId('FanSpeedValue');
             $ventilation_value->setType('info');
             $ventilation_value->setSubType('numeric');
             $ventilation_value->setIsHistorized(0);
@@ -510,6 +511,7 @@ class melcloud extends eqLogic
             $ventilation->setSubType('slider');
             $ventilation->setIsHistorized(0);
             $ventilation->setTemplate('dashboard', 'FanSpeed');
+            $ventilation->setConfiguration('maxValue', 5);
             $ventilation->setIsVisible(1);
             $ventilation->setValue($ventilation_value->getId());
             $ventilation->save();
