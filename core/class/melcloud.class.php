@@ -639,6 +639,7 @@ class melcloudCmd extends cmd
         }
 
         if ('FanSpeed' == $this->logicalId) {
+            log::add('melcloud', 'debug', 'Option pour FanSpeed : '.var_export($_options,true));
             if (isset($_options['message'])) {
                 melcloud::SetFan($_options['message'], $this->getEqLogic());
             }
