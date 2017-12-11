@@ -91,8 +91,8 @@
         var vitesseValue = '#state#';
         var vitesseMax = ('#maxValue#'=='') ? 5 : parseInt('#maxValue#');
         if(vitesseMax<5) {
-            for(var i=vitesseMax+1;i<=5+1;i++) {
-                $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse' + i).hide();
+            for(var i#id#=vitesseMax+1;i#id#<=6;i#id#++) {
+                $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse' + i#id#).hide();
             }
             $('.fanSpeed#id#').css("width", function() {
                 return 175-(35*(5-vitesseMax));
