@@ -95,6 +95,7 @@
             for(var i=vitesseMax+1;i<=5;i++) {
                 $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse' + i).hide();
             }
+            $('.cmd[data-cmd_id=#id#] .fanSpeed#id#').css("width",175-(35*(5-vitesseMax)) + 'px');
         }
 
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse'+vitesseValue+' i').addClass("selected");
