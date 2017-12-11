@@ -96,7 +96,7 @@
                 var idEnCours = $(this).attr('id');
                 $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse'+vitesseValue+' i').removeClass("selected");
                 $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+idEnCours+' i').addClass("selected");
-                jeedom.cmd.execute({id: '#id#', value: {other: parseInt(idEnCours.replace('vitesse',''))}, notify:true});
+                jeedom.cmd.execute({id: '#id#', value: {slider: parseInt(idEnCours.replace('vitesse',''))}, notify:true});
             });
         });
     </script>
