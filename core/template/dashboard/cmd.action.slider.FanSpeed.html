@@ -111,18 +111,16 @@
                     return tailleActuelle;
                 });
             }
-            //remettre le ! après le test!
             if(!vitesseAuto){
                 $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse0').remove();
                 $('.fanSpeed#id#').css("width", function() {
                     tailleActuelle = tailleActuelle-35;
                     return tailleActuelle;
                 });
-                //retravailler sur les elements vitesse1 vitesse2 etc... avec le left qui commence à 0 etc...
                 var left=0;
                 $('.cmd[data-cmd_id=#id#] .modeListe#id# li').each(function() {
                     $(this).css("left",left);
-                    left=left+35;
+                    left+=35;
                 });
             }
             $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse'+options.display_value+' i').addClass("selected");
@@ -131,10 +129,9 @@
         jeedom.cmd.update['#id#']({display_value: '#state#'});
         $('.cmd[data-cmd_id=#id#] .modeListe#id# li').each(function() {
             $(this).click(function() {
-                var idEnCours = $(this).attr('id');
                 $('.cmd[data-cmd_id=#id#] .modeListe#id# i.selected').removeClass("selected");
-                $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+idEnCours+' i').addClass("selected");
-                jeedom.cmd.execute({id: '#id#', value: {slider: parseInt(idEnCours.replace('vitesse',''))}, notify:true});
+                $(this).addClass("selected");
+                jeedom.cmd.execute({id: '#id#', value: {slider: parseInt($(this).attr('id').replace('vitesse',''))}, notify:true});
             });
         });
     </script>
