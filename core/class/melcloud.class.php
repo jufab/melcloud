@@ -280,7 +280,7 @@ class melcloud extends eqLogic
                             $cmd->setConfiguration('maxValue', $device['Device']['NumberOfFanSpeeds']);
                             log::add('melcloud', 'debug', 'log pour le FanSpeed sur le auto : ' . $device['Device']['HasAutomaticFanSpeed']);
                             $arr = array('hasAutomatic' => $device['Device']['HasAutomaticFanSpeed']);
-                            $cmd->setDisplay('parameters', json_encode($arr));
+                            $cmd->setDisplay('parameters', $arr);
 
                             //on break pas exprès pour le default!
                         default:
