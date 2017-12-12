@@ -110,16 +110,20 @@
                     tailleActuelle = tailleActuelle-(35*(5-vitesseMax));
                     return tailleActuelle;
                 });
-                $('.cmd[data-cmd_id=#id#] .modeListe#id#').css("width",tailleActuelle);
             }
             //remettre le ! après le test!
             if(vitesseAuto){
                 $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse0').remove();
-                $('.fanSpeed#id#').css("width", function(value) {
+                $('.fanSpeed#id#').css("width", function() {
                     tailleActuelle = tailleActuelle-35;
                     return tailleActuelle;
                 });
-                $('.cmd[data-cmd_id=#id#] .modeListe#id#').css("width",tailleActuelle);
+                //retravailler sur les elements vitesse1 vitesse2 etc... avec le left qui commence à 0 etc...
+                var left=0;
+                $('.cmd[data-cmd_id=#id#] .modeListe#id# li').each(function() {
+                    $(this).css("left",left);
+                    left=left+35;
+                });
             }
             $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse'+options.display_value+' i').addClass("selected");
         };
