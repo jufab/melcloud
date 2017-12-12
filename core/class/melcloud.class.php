@@ -278,8 +278,7 @@ class melcloud extends eqLogic
                         case 'FanSpeed':
                             log::add('melcloud', 'debug', 'log pour le FanSpeed ' . $cmd->getLogicalId() . ' ' . $device['Device']['NumberOfFanSpeeds']);
                             $cmd->setConfiguration('maxValue', $device['Device']['NumberOfFanSpeeds']);
-                            $cmd->setConfiguration('hasAutomatic', $device['Device']['HasAutomaticFanSpeed']);
-                            //$cmd->setDisplay('parameters', '{\'hasAutomatic\':'+$device['Device']['HasAutomaticFanSpeed']+'}');
+                            $cmd->setDisplay('parameters', '{\'hasAutomatic\':'+$device['Device']['HasAutomaticFanSpeed']+'}');
 
                             //on break pas exprès pour le default!
                         default:
@@ -579,7 +578,7 @@ class melcloud extends eqLogic
 
     public function postRemove(){}
 
-    public function toHtml($_version = 'dashboard') {
+   /* public function toHtml($_version = 'dashboard') {
         $replace = $this->preToHtml($_version);
         if (!is_array($replace)) {
             return $replace;
@@ -593,7 +592,7 @@ class melcloud extends eqLogic
         $html = $ventilation->getWidgetTemplateCode($_version);
         $html = template_replace($replace, $html);
         return $html;
-    }
+    }*/
 
 
     /*public function toHtml($_version = 'dashboard') {
