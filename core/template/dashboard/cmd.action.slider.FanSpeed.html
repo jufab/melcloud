@@ -111,6 +111,7 @@
                     tailleActuelle = tailleActuelle-(35*(5-vitesseMax));
                     return tailleActuelle;
                 });
+                $('.cmd[data-cmd_id=#id#] .modeListe#id#').css("width",tailleActuelle);
             }
             //remettre le ! après le test!
             if(vitesseAuto){
@@ -119,6 +120,7 @@
                     tailleActuelle = tailleActuelle-35;
                     return tailleActuelle;
                 });
+                $('.cmd[data-cmd_id=#id#] .modeListe#id#').css("width",tailleActuelle);
             }
             $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse'+options.display_value+' i').addClass("selected");
         };
