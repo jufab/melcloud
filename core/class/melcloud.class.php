@@ -276,7 +276,7 @@ class melcloud extends eqLogic
                             $cmd->save();
                             break;
                         case 'FanSpeed':
-                            log::add('melcloud', 'debug', 'log pour le FanSpeed ' . $cmd->getLogicalId() . ' ' . $device['Device'][$cmd->getLogicalId()]);
+                            log::add('melcloud', 'debug', 'log pour le FanSpeed ' . $cmd->getLogicalId() . ' ' . $device['Device']['NumberOfFanSpeeds']);
                             $cmd->setConfiguration('maxValue', $device['Device']['NumberOfFanSpeeds']);
                             //on break pas exprès pour le default!
                         default:
