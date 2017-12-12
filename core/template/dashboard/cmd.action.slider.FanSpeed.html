@@ -99,26 +99,28 @@
 
     <!-- la partie script -->
     <script>
-        var vitesseValue = '#state#';
-        var vitesseMax = ('#maxValue#'=='') ? 5 : parseInt('#maxValue#');
-        var vitesseAuto =('#hasAutomatic#'=='')? true : ('#hasAutomatic#'=='1');
-        if(vitesseMax<5) {
-            for(var i#id#=vitesseMax+1;i#id#<=6;i#id#++) {
-                $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse' + i#id#).hide();
+        jeedom.cmd.update['#id#'] = function(options) {
+            var vitesseMax = ('#maxValue#'=='') ? 5 : parseInt('#maxValue#');
+            var vitesseAuto =('#hasAutomatic#'=='')? true : ('#hasAutomatic#'=='1');
+            if(vitesseMax<5) {
+                for(var i=vitesseMax+1;i<=6;i++) {
+                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse' + i).hide();
+                }
+                $('.fanSpeed#id#').css("width", function(value) {
+                    return value-(35*(5-vitesseMax));
+                });
             }
-            $('.fanSpeed#id#').css("width", function() {
-                return 210-(35*(5-vitesseMax));
-            });
-        }
+            //remettre le ! après le test!
+            if(vitesseAuto){
+                $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse0').hide();
+                $('.fanSpeed#id#').css("width", function(value) {
+                    return value-35;
+                });
+            }
+            $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse'+options.display_value+' i').addClass("selected");
+        };
 
-        if(!vitesseAuto){
-            $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse0').hide();
-            $('.fanSpeed#id#').css("width", function(value) {
-                return value-35;
-            });
-        }
-
-        $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse'+vitesseValue+' i').addClass("selected");
+        jeedom.cmd.update['#id#']({display_value: '#state#'});
         $('.cmd[data-cmd_id=#id#] .modeListe#id# li').each(function() {
             $(this).click(function() {
                 var idEnCours = $(this).attr('id');
