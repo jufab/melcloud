@@ -1,10 +1,9 @@
-<div class="cmd tooltips cmd cmd-widget fanSpeed#id#" data-type="action" data-subtype="slider" data-cmd_id="#id#" data-cmd_uid="#uid#">
+<div class="cmd tooltips cmd cmd-widget fanSpeed#id#" data-type="action" data-subtype="slider" data-cmd_id="#id#" data-cmd_uid="#uid#" style="width: 210px;">
     <!-- La partie CSS -->
 
     <style>
         div.fanSpeed#id# {
             margin-top: 0px;
-            width: 210px;
             min-height: 35px;
         }
         .modeListe#id# {
@@ -106,16 +105,18 @@
                 for(var i=vitesseMax+1;i<=6;i++) {
                     $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse' + i).hide();
                 }
-                $('.fanSpeed#id#').css("width", function(index,value) {
-                    return value-(35*(5-vitesseMax));
-                });
+                $('.fanSpeed#id#').css({
+                    width: function( index, value ) {
+                        return value-(35*(5-vitesseMax));
+                    }});
             }
             //remettre le ! après le test!
             if(vitesseAuto){
                 $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse0').hide();
-                $('.fanSpeed#id#').css("width", function(index,value) {
+                $('.fanSpeed#id#').css({
+                    width: function( index, value ) {
                     return value-35;
-                });
+                }});
             }
             $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse'+options.display_value+' i').addClass("selected");
         };
