@@ -278,6 +278,8 @@ class melcloud extends eqLogic
                         case 'FanSpeed':
                             log::add('melcloud', 'debug', 'log pour le FanSpeed ' . $cmd->getLogicalId() . ' ' . $device['Device']['NumberOfFanSpeeds']);
                             $cmd->setConfiguration('maxValue', $device['Device']['NumberOfFanSpeeds']);
+                            $cmd->setConfiguration('hasAutomatic', $device['Device']['HasAutomaticFanSpeed']);
+
                             //on break pas exprès pour le default!
                         default:
                             log::add('melcloud', 'debug', 'log ' . $cmd->getLogicalId() . ' ' . $device['Device'][$cmd->getLogicalId()]);
