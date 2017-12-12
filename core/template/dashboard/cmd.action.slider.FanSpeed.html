@@ -130,7 +130,7 @@
         $('.cmd[data-cmd_id=#id#] .modeListe#id# li').each(function() {
             $(this).click(function() {
                 $('.cmd[data-cmd_id=#id#] .modeListe#id# i.selected').removeClass("selected");
-                $(this).addClass("selected");
+                $(this).children().addClass("selected");
                 jeedom.cmd.execute({id: '#id#', value: {slider: parseInt($(this).attr('id').replace('vitesse',''))}, notify:true});
             });
         });
