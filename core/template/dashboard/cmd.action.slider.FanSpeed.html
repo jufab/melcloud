@@ -106,14 +106,14 @@
                 for(var i=vitesseMax+1;i<=6;i++) {
                     $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse' + i).hide();
                 }
-                $('.fanSpeed#id#').css("width", function(value) {
+                $('.fanSpeed#id#').css("width", function(index,value) {
                     return value-(35*(5-vitesseMax));
                 });
             }
             //remettre le ! après le test!
             if(vitesseAuto){
                 $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse0').hide();
-                $('.fanSpeed#id#').css("width", function(value) {
+                $('.fanSpeed#id#').css("width", function(index,value) {
                     return value-35;
                 });
             }
