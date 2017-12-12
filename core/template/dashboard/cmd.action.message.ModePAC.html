@@ -79,17 +79,20 @@
     <p class='cmdName' style="font-weight: bold;font-size : 12px;">#name#</p>
     <span class="pull-left">
         <ul class="modeListe#id#">
-            <li id="froid"><i></i></li>
-            <li id="sechage"><i></i></li>
-            <li id="ventilation"><i></i></li>
-            <li id="chaud"><i></i></li>
-            <li id="auto"><i></i></li>
+            <li id="froid" data-toggle="tooltip" data-placement="right" title="Froid"><i></i></li>
+            <li id="sechage" data-toggle="tooltip" data-placement="right" title="Séchage"><i></i></li>
+            <li id="ventilation" data-toggle="tooltip" data-placement="right" title="Ventilation"><i></i></li>
+            <li id="chaud" data-toggle="tooltip" data-placement="right" title="Chaud"><i></i></li>
+            <li id="auto" data-toggle="tooltip" data-placement="right" title="Auto"><i></i></li>
         </ul>
         <!--<img class="info iconCmd#id#" width="35px"/>-->
     </span>
 
     <!-- la partie script -->
     <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
         var correspondance =  {'1':'chaud','2':'froid','3':'rafraichir','7':'ventilation','8':'auto'};
         var modePAC = '#state#';
         doitAjouterLaClasseSelected(true);
