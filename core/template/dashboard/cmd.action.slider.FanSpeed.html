@@ -105,7 +105,7 @@
             var tailleActuelle=210;
             if(vitesseMax<5) {
                 for(var i=vitesseMax+1;i<=6;i++) {
-                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse' + i).hide();
+                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse' + i).remove();
                 }
                 $('.fanSpeed#id#').css("width", function() {
                     tailleActuelle = tailleActuelle-(35*(5-vitesseMax));
@@ -115,7 +115,7 @@
             }
             //remettre le ! après le test!
             if(vitesseAuto){
-                $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse0').hide();
+                $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse0').remove();
                 $('.fanSpeed#id#').css("width", function(value) {
                     tailleActuelle = tailleActuelle-35;
                     return tailleActuelle;
