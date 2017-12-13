@@ -78,24 +78,31 @@
     <!-- la partie html -->
     <p class='cmdName' style="font-weight: bold;font-size : 12px;">#name#</p>
     <ul class="modeListe#id#">
-        <li id="froid" data-toggle="tooltip" title="Froid"><i></i></li>
-        <li id="rafraichir" data-toggle="tooltip" title="rafraichir"><i></i></li>
-        <li id="ventilation" data-toggle="tooltip" title="Ventilation"><i></i></li>
-        <li id="chaud" data-toggle="tooltip" title="Chaud"><i></i></li>
-        <li id="auto" data-toggle="tooltip" title="Auto"><i></i></li>
+        <li id="froid" data-key="2" data-toggle="tooltip" title="Froid"><i></i></li>
+        <li id="rafraichir" data-key="3" data-toggle="tooltip" title="rafraichir"><i></i></li>
+        <li id="ventilation" data-key="7" data-toggle="tooltip" title="Ventilation"><i></i></li>
+        <li id="chaud" data-key="1" data-toggle="tooltip" title="Chaud"><i></i></li>
+        <li id="auto" data-key="8" data-toggle="tooltip" title="Auto"><i></i></li>
     </ul>
 
     <!-- la partie script -->
     <script>
-        var correspondance#id# =  {'1':'chaud','2':'froid','3':'rafraichir','7':'ventilation','8':'auto'};
+        var correspondance#id# = {'1':'chaud','2':'froid','3':'rafraichir','7':'ventilation','8':'auto'};
         jeedom.cmd.update['#id#'] = function(options) {
             $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+options.display_value+' i').addClass("selected");
-            $.each(correspondance#id#, function(key, value) {
+            /*$.each(correspondance#id#, function(key, value) {
                 $('.cmd[data-cmd_id=#id#] .modeListe#id# li#'+value).attr("key",key);
                 $('.cmd[data-cmd_id=#id#] .modeListe#id# li#'+value).click(function() {
                     $('.cmd[data-cmd_id=#id#] .modeListe#id# .selected').removeClass("selected");
                     $(this).children().addClass("selected");
                     jeedom.cmd.execute({id: '#id#', value: {message: parseInt(key)}, notify:true});
+                });
+            });*/
+            $('.cmd[data-cmd_id=#id#] .modeListe#id# li').each(function(){
+                $(this).click(function(){
+                    $('.cmd[data-cmd_id=#id#] .modeListe#id# .selected').removeClass("selected");
+                    $(this).children().addClass("selected");
+                    jeedom.cmd.execute({id: '#id#', value: {message: parseInt($(this).attr('data-key'))}, notify:true});
                 });
             });
         };
