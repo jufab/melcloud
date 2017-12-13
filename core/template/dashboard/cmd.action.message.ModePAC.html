@@ -96,7 +96,8 @@
         var correspondance =  {'1':'chaud','2':'froid','3':'rafraichir','7':'ventilation','8':'auto'};
         var modePAC = '#state#';
         $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+correspondance[modePAC]+' i').addClass("selected");
-        $.each( correspondance, function( key, value ) {
+        $.each(correspondance, function(key, value) {
+            console.log('valeur de la value : ' + value);
             $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+value).click(function() {
                 $('.cmd[data-cmd_id=#id#] .modeListe#id# i.selected').removeClass("selected");
                 $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+value+' i').addClass("selected");
