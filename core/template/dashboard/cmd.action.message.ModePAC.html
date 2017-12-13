@@ -90,9 +90,6 @@
 
     <!-- la partie script -->
     <script>
-        $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip();
-        });
         var correspondance =  {'1':'chaud','2':'froid','3':'rafraichir','7':'ventilation','8':'auto'};
         jeedom.cmd.update['#id#'] = function(options) {
             $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+options.display_value+' i').addClass("selected");
@@ -100,7 +97,6 @@
         jeedom.cmd.update['#id#']({display_value: correspondance['#state#']});
 
         $.each(correspondance, function(key, value) {
-            console.log('valeur de la value : ' + value);
             $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+value).click(function() {
                 $('.cmd[data-cmd_id=#id#] .modeListe#id# i.selected').removeClass("selected");
                 $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+value+' i').addClass("selected");

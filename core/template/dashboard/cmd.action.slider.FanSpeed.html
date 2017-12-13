@@ -98,9 +98,6 @@
 
     <!-- la partie script -->
     <script>
-        $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip();
-        });
         jeedom.cmd.update['#id#'] = function(options) {
             var vitesseMax = ('#maxValue#'=='') ? 5 : parseInt('#maxValue#');
             var vitesseAuto =('#hasAutomatic#'=='')? true : ('#hasAutomatic#'=='1');
