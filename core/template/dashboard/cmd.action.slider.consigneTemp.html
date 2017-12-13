@@ -30,6 +30,7 @@
                 min: ('#minValue#' == '') ? 0 : parseInt('#minValue#'),
                 max: ('#maxValue#' == '') ? 100 : parseInt('#maxValue#'),
                 value: ('#state#' == '') ? 0 : parseInt(_options.display_value),
+                step: ('#step#' == '') ? 1 : parseFloat('#step#'),
                 create: function () {
                     handle.text($(this).slider("value") + "°C");
                 },

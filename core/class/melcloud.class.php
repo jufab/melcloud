@@ -336,7 +336,8 @@ class melcloud extends eqLogic
         log::add('melcloud', 'debug', 'definir les temperatures Max et Min');
         log::add('melcloud', 'debug', 'OperationMode : '. $device['Device']['OperationMode']);
         log::add('melcloud', 'debug', 'MaxTempHeat : '. $device['Device']['MaxTempHeat']);
-        $cmd->setConfiguration('step',floatval($device['Device']['TemperatureIncrement']));
+        $stepArray = array('step' => floatval($device['Device']['TemperatureIncrement']));
+        $cmd->setDisplay('parameters', $stepArray);
         if('1'==$device['Device']['OperationMode']) {
             $cmd->setConfiguration('maxValue', intval($device['Device']['MaxTempHeat']));
             $cmd->setConfiguration('minValue', intval($device['Device']['MinTempHeat']));
