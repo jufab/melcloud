@@ -91,8 +91,8 @@
         jeedom.cmd.update['#id#'] = function(options) {
             $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+options.display_value+' i').addClass("selected");
             $.each(correspondance#id#, function(key, value) {
-                $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+value).attr("key",key);
-                $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+value).click(function() {
+                $('.cmd[data-cmd_id=#id#] .modeListe#id# li#'+value).attr("key",key);
+                $('.cmd[data-cmd_id=#id#] .modeListe#id# li#'+value).click(function() {
                     $('.cmd[data-cmd_id=#id#] .modeListe#id# .selected').removeClass("selected");
                     $(this).children().addClass("selected");
                     jeedom.cmd.execute({id: '#id#', value: {message: parseInt(key)}, notify:true});
