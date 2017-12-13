@@ -33,12 +33,12 @@
             width: 35px;
             background: url('plugins/melcloud/core/template/dashboard/cmd.action.message.ModePAC/modePAC.png') 0 0;
         }
-        .modeListe#id# #sechage {
+        .modeListe#id# #rafraichir {
             left: 35px;
             width: 35px;
             background: url('plugins/melcloud/core/template/dashboard/cmd.action.message.ModePAC/modePAC.png') -35px -35px;
         }
-        .modeListe#id# #sechage .selected, .modeListe#id# #sechage i:hover{
+        .modeListe#id# #rafraichir .selected, .modeListe#id# #rafraichir i:hover{
             left: 35px;
             width: 35px;
             background: url('plugins/melcloud/core/template/dashboard/cmd.action.message.ModePAC/modePAC.png') -35px 0;
@@ -77,16 +77,13 @@
 
     <!-- la partie html -->
     <p class='cmdName' style="font-weight: bold;font-size : 12px;">#name#</p>
-    <span class="pull-left">
-        <ul class="modeListe#id#">
-            <li id="froid" data-toggle="tooltip" title="Froid"><i></i></li>
-            <li id="sechage" data-toggle="tooltip" title="Séchage"><i></i></li>
-            <li id="ventilation" data-toggle="tooltip" title="Ventilation"><i></i></li>
-            <li id="chaud" data-toggle="tooltip" title="Chaud"><i></i></li>
-            <li id="auto" data-toggle="tooltip" title="Auto"><i></i></li>
-        </ul>
-        <!--<img class="info iconCmd#id#" width="35px"/>-->
-    </span>
+    <ul class="modeListe#id#">
+        <li id="froid" data-toggle="tooltip" title="Froid"><i></i></li>
+        <li id="rafraichir" data-toggle="tooltip" title="rafraichir"><i></i></li>
+        <li id="ventilation" data-toggle="tooltip" title="Ventilation"><i></i></li>
+        <li id="chaud" data-toggle="tooltip" title="Chaud"><i></i></li>
+        <li id="auto" data-toggle="tooltip" title="Auto"><i></i></li>
+    </ul>
 
     <!-- la partie script -->
     <script>
@@ -98,8 +95,8 @@
 
         $.each(correspondance, function(key, value) {
             $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+value).click(function() {
-                /*$('.cmd[data-cmd_id=#id#] .modeListe#id# i.selected').removeClass("selected");
-                $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+value+' i').addClass("selected");*/
+                $('.cmd[data-cmd_id=#id#] .modeListe#id# i.selected').removeClass("selected");
+                $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+value+' i').addClass("selected");
                 jeedom.cmd.execute({id: '#id#', value: {message: parseInt(key)}, notify:true});
             });
         });
