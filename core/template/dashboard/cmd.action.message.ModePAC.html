@@ -98,8 +98,8 @@
 
         $.each(correspondance, function(key, value) {
             $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+value).click(function() {
-                $('.cmd[data-cmd_id=#id#] .modeListe#id# i.selected').removeClass("selected");
-                $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+value+' i').addClass("selected");
+                /*$('.cmd[data-cmd_id=#id#] .modeListe#id# i.selected').removeClass("selected");
+                $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+value+' i').addClass("selected");*/
                 jeedom.cmd.execute({id: '#id#', value: {message: parseInt(key)}, notify:true});
             });
         });
