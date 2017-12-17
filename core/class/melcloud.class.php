@@ -298,12 +298,15 @@ class melcloud extends eqLogic
                     }
                 }
                 try {
-                    self::obtenirInfo($mylogical);
+                    $cmdCurrent = $mylogical->getCmd(null, 'CurrentWeather');
+                    if (is_object($cmdCurrent) && $cmdCurrent->getIsVisible()) {
+                        self::obtenirInfo($mylogical);
+                    }
                 } catch (Exception $exception) {
                     log::add('melcloud', 'error', 'oops : ' . $exception);
                 }
                 $mylogical->Refresh();
-                $mylogical->toHtml('dashboard');
+                $mylogical->toHtml();
                 $mylogical->refreshWidget();
             }
         }
