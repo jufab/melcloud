@@ -1,0 +1,138 @@
+<div class="cmd tooltips cmd cmd-widget fanSpeed#id#" data-type="action" data-subtype="slider" data-cmd_id="#id#" data-cmd_uid="#uid#">
+    <!-- La partie CSS -->
+
+    <style>
+        div.fanSpeed#id# {
+            margin-top: 0px;
+            /*width: 210px;*/
+            min-height: 35px;
+        }
+        .modeListe#id# {
+            padding : 0;
+            position: relative;
+        }
+        .modeListe#id# li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            position: absolute;
+            top: 0;
+            cursor:pointer;
+        }
+        .modeListe#id# li, .modeListe#id# i {
+            height: 35px;
+            display: block;
+        }
+        .modeListe#id# #vitesse0 {
+            left: 0px;
+            width: 35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.slider.FanSpeed/FanSpeed.png') 0 -35px;
+        }
+        .modeListe#id# #vitesse0 .selected, .modeListe#id# #vitesse0 i:hover {
+            left: 0px;
+            width: 35px;
+            background: url("plugins/melcloud/core/template/dashboard/cmd.action.slider.FanSpeed/FanSpeed.png") 0 0;
+        }
+        .modeListe#id# #vitesse1 {
+            left: 35px;
+            width: 35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.slider.FanSpeed/FanSpeed.png') -35px -35px;
+        }
+        .modeListe#id# #vitesse1 .selected, .modeListe#id# #vitesse1 i:hover{
+            left: 35px;
+            width: 35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.slider.FanSpeed/FanSpeed.png') -35px 0;
+        }
+        .modeListe#id# #vitesse2 {
+            left: 70px;
+            width: 35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.slider.FanSpeed/FanSpeed.png') -70px -35px;
+        }
+        .modeListe#id# #vitesse2 .selected, .modeListe#id# #vitesse2 i:hover{
+            left: 70px;
+            width: 35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.slider.FanSpeed/FanSpeed.png') -70px 0;
+        }
+        .modeListe#id# #vitesse3 {
+            left: 105px;
+            width: 35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.slider.FanSpeed/FanSpeed.png') -105px -35px;
+        }
+        .modeListe#id# #vitesse3 .selected, .modeListe#id# #vitesse3 i:hover{
+            left: 105px;
+            width: 35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.slider.FanSpeed/FanSpeed.png') -105px 0;
+        }
+        .modeListe#id# #vitesse4 {
+            left: 140px;
+            width: 35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.slider.FanSpeed/FanSpeed.png') -140px -35px;
+        }
+        .modeListe#id# #vitesse4 .selected, .modeListe#id# #vitesse4 i:hover{
+            left: 140px;
+            width: 35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.slider.FanSpeed/FanSpeed.png') -140px 0;
+        }
+        .modeListe#id# #vitesse5 {
+            left: 175px;
+            width: 35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.slider.FanSpeed/FanSpeed.png') -175px -35px;
+        }
+        .modeListe#id# #vitesse5 .selected, .modeListe#id# #vitesse5 i:hover{
+            left: 175px;
+            width: 35px;
+            background: url('plugins/melcloud/core/template/dashboard/cmd.action.slider.FanSpeed/FanSpeed.png') -175px 0;
+        }
+    </style>
+
+    <!-- la partie html -->
+    <p class='cmdName' style="font-weight: bold;font-size : 12px;">#name#</p>
+    <ul class="modeListe#id#">
+        <li id="vitesse0" data-toggle="tooltip" title="Vitesse Auto"><i></i></li>
+        <li id="vitesse1" data-toggle="tooltip" title="Vitesse 1"><i></i></li>
+        <li id="vitesse2" data-toggle="tooltip" title="Vitesse 2"><i></i></li>
+        <li id="vitesse3" data-toggle="tooltip" title="Vitesse 3"><i></i></li>
+        <li id="vitesse4" data-toggle="tooltip" title="Vitesse 4"><i></i></li>
+        <li id="vitesse5" data-toggle="tooltip" title="Vitesse 5"><i></i></li>
+    </ul>
+
+    <!-- la partie script -->
+    <script>
+        jeedom.cmd.update['#id#'] = function(options) {
+            var vitesseMax = ('#maxValue#'=='') ? 5 : parseInt('#maxValue#');
+            var vitesseAuto =('#hasAutomatic#'=='')? true : ('#hasAutomatic#'=='1');
+            var tailleActuelle=210;
+            if(vitesseMax<5) {
+                for(var i=vitesseMax+1;i<=6;i++) {
+                    $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse' + i).remove();
+                }
+            }
+            $('.fanSpeed#id#').css("width", function() {
+                tailleActuelle = tailleActuelle-(35*(5-vitesseMax));
+                return tailleActuelle;
+            });
+            if(!vitesseAuto){
+                $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse0').remove();
+                $('.fanSpeed#id#').css("width", function() {
+                    tailleActuelle = tailleActuelle-35;
+                    return tailleActuelle;
+                });
+                var left=0;
+                $('.cmd[data-cmd_id=#id#] .modeListe#id# li').each(function() {
+                    $(this).css("left",left);
+                    left+=35;
+                });
+            }
+            $('.cmd[data-cmd_id=#id#] .modeListe#id# #vitesse'+options.display_value+' i').addClass("selected");
+        };
+
+        jeedom.cmd.update['#id#']({display_value: '#state#'});
+        $('.cmd[data-cmd_id=#id#] .modeListe#id# li').each(function() {
+            $(this).click(function() {
+                $('.cmd[data-cmd_id=#id#] .modeListe#id# i.selected').removeClass("selected");
+                $(this).children().addClass("selected");
+                jeedom.cmd.execute({id: '#id#', value: {slider: parseInt($(this).attr('id').replace('vitesse',''))}, notify:true});
+            });
+        });
+    </script>
+</div>

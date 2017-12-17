@@ -5,7 +5,7 @@
     <description>Permet de gérer son chauffage et sa climatisation à distance.</description>
     <icon>jeedom-thermo-moyen</icon>
     <licence>AGPL</licence>
-    <author>Florian Gouyon</author>
+    <author>Florian Gouyon, Julien Fabre</author>
     <installation>Aucune</installation>
     <require>0.1</require>
     <category>wellness</category>
