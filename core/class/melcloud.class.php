@@ -372,7 +372,7 @@ class melcloud extends eqLogic
     public function preSave(){}
 
     public function postSave(){
-        
+
         if ($this->getConfiguration('deviceid') == '') {
             self::pull();
             if ($this->getConfiguration('deviceid') == '') return;
@@ -484,8 +484,8 @@ class melcloud extends eqLogic
             $RoomTemperature->setIsVisible(1);
             $RoomTemperature->setUnite('°C');
             $RoomTemperature->setValue($this->getId());
-            $RoomTemperature->save();
             $RoomTemperature->setOrder(6);
+            $RoomTemperature->save();
             $RoomTemperature->event(0);
         }
 
