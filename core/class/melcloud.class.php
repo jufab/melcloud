@@ -251,8 +251,12 @@ class melcloud extends eqLogic
         log::add('melcloud', 'debug', 'pull : ' . $device['DeviceName']);
         if ($device['DeviceID'] == '') return;
         log::add('melcloud', 'info', $device['DeviceID'] . ' ' . $device['DeviceName']);
-        foreach (eqLogic::byType('melcloud', true) as $mylogical) {
-            if ($mylogical->getConfiguration('namemachine') == $device['DeviceName']) {
+        $eqLogic = eqLogic::byTypeAndSearhConfiguration('melcloud','"namemachine":"'.$device['DeviceName'].'"');
+        if(count($eqLogic)==0) {
+            self::definirLesDevicesAutomatiquement($device);
+        } else {
+        $mylogical = $eqLogic[0];
+            if ($mylogical->getIsEnable()) {
                 log::add('melcloud', 'debug', 'setdevice ' . $device['Device']['DeviceID']);
                 $mylogical->setConfiguration('deviceid', $device['Device']['DeviceID']);
                 $mylogical->setConfiguration('buildid', $device['BuildingID']);
@@ -269,7 +273,7 @@ class melcloud extends eqLogic
                         case 'FanSpeedValue':
                         case 'OperationModeValue':
                         case 'SetTemperatureValue':
-                            $operation = str_replace("Value","",$cmd->getLogicalId());
+                            $operation = str_replace("Value", "", $cmd->getLogicalId());
                             log::add('melcloud', 'debug', 'log de ' . $cmd->getLogicalId() . ' avec l\'operation ' . $operation . ' et la valeur' . $device['Device'][$operation]);
                             $cmd->setCollectDate('');
                             $cmd->event($device['Device'][$operation]);
@@ -282,11 +286,11 @@ class melcloud extends eqLogic
                             $arr = array('hasAutomatic' => $device['Device']['HasAutomaticFanSpeed']);
                             $cmd->setDisplay('parameters', $arr);
 
-                            //on break pas exprès pour le default!
+                        //on break pas exprès pour le default!
                         default:
                             log::add('melcloud', 'debug', 'log ' . $cmd->getLogicalId() . ' ' . $device['Device'][$cmd->getLogicalId()]);
-                            if('SetTemperature' == $cmd->getLogicalId())
-                                self::definirLaConfPourSliderTemperature($cmd,$device);
+                            if ('SetTemperature' == $cmd->getLogicalId())
+                                self::definirLaConfPourSliderTemperature($cmd, $device);
                             if ('LastTimeStamp' == $cmd->getLogicalId()) {
                                 $cmd->event(str_replace('T', ' ', $device['Device'][$cmd->getLogicalId()]));
                             } else {
@@ -312,7 +316,7 @@ class melcloud extends eqLogic
         }
     }
 
-    public static function obtenirInfo($mylogical)
+    private static function obtenirInfo($mylogical)
     {
         log::add('melcloud', 'debug', 'Obtenir Info pour la machine:  ' . $mylogical->getConfiguration('namemachine'));
         $montoken = config::byKey('MyToken', 'melcloud', '');
@@ -335,7 +339,7 @@ class melcloud extends eqLogic
         $mylogical->Refresh();
     }
 
-    public static function definirLaConfPourSliderTemperature($cmd,$device) {
+    private static function definirLaConfPourSliderTemperature($cmd,$device) {
         log::add('melcloud', 'debug', 'definir les temperatures Max et Min');
         log::add('melcloud', 'debug', 'OperationMode : '. $device['Device']['OperationMode']);
         log::add('melcloud', 'debug', 'MaxTempHeat : '. $device['Device']['MaxTempHeat']);
@@ -348,8 +352,19 @@ class melcloud extends eqLogic
             $cmd->setConfiguration('maxValue', intval($device['Device']['MaxTempCoolDry']));
             $cmd->setConfiguration('minValue',intval($device['Device']['MinTempCoolDry']));
         }
+    }
 
-
+    private static function definirLeDeviceAutomatiquement($device) {
+        $theEQlogic = eqLogic::byTypeAndSearhConfiguration('melcloud','"namemachine":"'.$device['DeviceName'].'"');
+        if (count($theEQlogic) == 0){
+            $mylogical = new melcloud();
+            $mylogical->setIsVisible(0);
+            $mylogical->setIsEnable(0);
+            $mylogical->setEqType_name('melcloud');
+            $mylogical->setName($device['DeviceName']);
+            $mylogical->setConfiguration('namemachine',$device['DeviceName']);
+            $mylogical->save();
+        }
     }
 
     //Fonction exécutée automatiquement toutes les minutes par Jeedom
