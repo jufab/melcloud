@@ -251,11 +251,11 @@ class melcloud extends eqLogic
         log::add('melcloud', 'debug', 'pull : ' . $device['DeviceName']);
         if ($device['DeviceID'] == '') return;
         log::add('melcloud', 'info', $device['DeviceID'] . ' ' . $device['DeviceName']);
-        $eqLogic = eqLogic::byTypeAndSearhConfiguration('melcloud','"namemachine":"'.$device['DeviceName'].'"');
-        if(count($eqLogic)==0) {
-            self::definirLesDevicesAutomatiquement($device);
+        $theEqLogic = eqLogic::byTypeAndSearhConfiguration('melcloud','"namemachine":"'.$device['DeviceName'].'"');
+        if(count($theEqLogic)==0) {
+            self::definirLeDeviceAutomatiquement($device);
         } else {
-        $mylogical = $eqLogic[0];
+        $mylogical = $theEqLogic[0];
             if ($mylogical->getIsEnable()) {
                 log::add('melcloud', 'debug', 'setdevice ' . $device['Device']['DeviceID']);
                 $mylogical->setConfiguration('deviceid', $device['Device']['DeviceID']);
@@ -355,16 +355,13 @@ class melcloud extends eqLogic
     }
 
     private static function definirLeDeviceAutomatiquement($device) {
-        $theEQlogic = eqLogic::byTypeAndSearhConfiguration('melcloud','"namemachine":"'.$device['DeviceName'].'"');
-        if (count($theEQlogic) == 0){
-            $mylogical = new melcloud();
-            $mylogical->setIsVisible(0);
-            $mylogical->setIsEnable(0);
-            $mylogical->setEqType_name('melcloud');
-            $mylogical->setName($device['DeviceName']);
-            $mylogical->setConfiguration('namemachine',$device['DeviceName']);
-            $mylogical->save();
-        }
+        $mylogical = new melcloud();
+        $mylogical->setIsVisible(0);
+        $mylogical->setIsEnable(0);
+        $mylogical->setEqType_name('melcloud');
+        $mylogical->setName($device['DeviceName']);
+        $mylogical->setConfiguration('namemachine',$device['DeviceName']);
+        $mylogical->save();
     }
 
     //Fonction exécutée automatiquement toutes les minutes par Jeedom
