@@ -478,7 +478,7 @@ class melcloud extends eqLogic
             $RoomTemperature->setLogicalId('RoomTemperature');
             $RoomTemperature->setType('info');
             $RoomTemperature->setSubType('numeric');
-            $RoomTemperature->setTemplate('dashboard', 'TempImg');
+            $RoomTemperature->setTemplate('dashboard', 'TempImgSimple');
             $RoomTemperature->setTemplate('mobile', 'tempIMG');
             $RoomTemperature->setIsHistorized(0);
             $RoomTemperature->setIsVisible(1);
