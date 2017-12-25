@@ -401,7 +401,8 @@ class melcloud extends eqLogic
             $on->setType('action');
             $on->setSubType('other');
             $on->setTemplate('dashboard', 'OnOffLight');
-            $on->setTemplate('mobile', 'ToggleSwitch_IMG');
+            $on->setTemplate('mobile', 'OnOffLight');
+            //$on->setTemplate('mobile', 'ToggleSwitch_IMG');
             $on->setIsHistorized(0);
             $on->setIsVisible(1);
             $on->setDisplay('generic_type', 'ENERGY_ON');
@@ -421,7 +422,8 @@ class melcloud extends eqLogic
             $off->setType('action');
             $off->setSubType('other');
             $off->setTemplate('dashboard', 'OnOffLight');
-            $off->setTemplate('mobile', 'ToggleSwitch_IMG');
+            $off->setTemplate('mobile', 'OnOffLight');
+            //$off->setTemplate('mobile', 'ToggleSwitch_IMG');
             $off->setIsHistorized(0);
             $off->setIsVisible(1);
             $off->setDisplay('generic_type', 'ENERGY_OFF');
@@ -456,6 +458,7 @@ class melcloud extends eqLogic
             $consigne->setType('action');
             $consigne->setSubType('slider');
             $consigne->setTemplate('dashboard', 'consigneTemp');
+            $consigne->setTemplate('mobile', 'consigneTemp');
             $consigne->setIsHistorized(0);
             $consigne->setUnite('°C');
             $consigne->setIsVisible(1);
@@ -479,7 +482,8 @@ class melcloud extends eqLogic
             $RoomTemperature->setType('info');
             $RoomTemperature->setSubType('numeric');
             $RoomTemperature->setTemplate('dashboard', 'TempImgSimple');
-            $RoomTemperature->setTemplate('mobile', 'tempIMG');
+            $RoomTemperature->setTemplate('mobile', 'TempImgSimple');
+            //$RoomTemperature->setTemplate('mobile', 'tempIMG');
             $RoomTemperature->setIsHistorized(0);
             $RoomTemperature->setIsVisible(1);
             $RoomTemperature->setUnite('°C');
@@ -547,6 +551,7 @@ class melcloud extends eqLogic
             $ventilation->setSubType('slider');
             $ventilation->setIsHistorized(0);
             $ventilation->setTemplate('dashboard', 'FanSpeed');
+            $ventilation->setTemplate('mobile', 'FanSpeed');
             $ventilation->setConfiguration('maxValue', 5);
             $ventilation->setIsVisible(1);
             $ventilation->setConfiguration('updateCmdId', $ventilation_value->getEqLogic_id());
