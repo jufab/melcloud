@@ -399,6 +399,7 @@ class melcloud extends eqLogic
         }
         $onoff_state->setType('info');
         $onoff_state->setSubType('binary');
+        $onoff_state->setDisplay('generic_type', 'ENERGY_STATE');
         $onoff_state->setEqLogic_id($this->getId());
         $onoff_state->setOrder(1);
         $onoff_state->save();
