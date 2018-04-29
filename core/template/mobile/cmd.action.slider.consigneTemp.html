@@ -1,0 +1,47 @@
+<span class="cmd cmd-widget" data-type="action" data-subtype="slider" data-cmd_id="#id#" data-cmd_uid="#uid#"
+      data-version="#version#">
+    <style>
+    #custom-handle#id# {
+        width: 3em;
+        height: 1.6em;
+        top: 50%;
+        margin-top: -.8em;
+        text-align: center;
+        line-height: 1.6em;
+        background-color: #b3b3b3;
+        color: white;
+        font-weight: bold;
+    }
+
+    .cmd[data-cmd_uid=#uid#]
+    .ui-state-default {
+        cursor: pointer;
+    }
+  </style>
+    <div class="cmdName" style="font-weight: bold;font-size : 12px;#hideCmdName#">#name_display#</div>
+    <div class="slider#id#" style="margin : 5px 10px 8px 10px;width: 80px;top:15px;" value="#state#">
+        <div id="custom-handle#id#" class="ui-slider-handle"></div>
+    </div>
+    <script>
+        $(".cmd[data-cmd_uid=#uid#] .slider#id#.slider-horizontal").css('z-index', 1);
+        jeedom.cmd.update['#id#'] = function (_options) {
+            $(".cmd[data-cmd_id=#id#] .slider#id#").slider({
+                min: ('#minValue#' == '') ? 0 : parseInt('#minValue#'),
+                max: ('#maxValue#' == '') ? 100 : parseInt('#maxValue#'),
+                value: ('#state#' == '') ? 0 : parseInt(_options.display_value),
+                step: ('#step#' == '') ? 1 : parseFloat('#step#'),
+                create: function () {
+                    $("#custom-handle#id#").text($(this).slider("value") + "°C");
+                },
+                slide: function (event, ui) {
+                    $("#custom-handle#id#").text(ui.value + "°C");
+                }
+            });
+            $(".cmd[data-cmd_uid=#uid#] .slider#id#").on('slidestop', function (event, ui) {
+                jeedom.cmd.execute({id: '#id#', value: {slider: ui.value}});
+            });
+        };
+        jeedom.cmd.update['#id#']({display_value: '#state#'});
+
+    </script>
+</span>

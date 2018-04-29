@@ -251,8 +251,12 @@ class melcloud extends eqLogic
         log::add('melcloud', 'debug', 'pull : ' . $device['DeviceName']);
         if ($device['DeviceID'] == '') return;
         log::add('melcloud', 'info', $device['DeviceID'] . ' ' . $device['DeviceName']);
-        foreach (eqLogic::byType('melcloud', true) as $mylogical) {
-            if ($mylogical->getConfiguration('namemachine') == $device['DeviceName']) {
+        $theEqLogic = eqLogic::byTypeAndSearhConfiguration('melcloud','"namemachine":"'.$device['DeviceName'].'"');
+        if(count($theEqLogic)==0) {
+            self::definirLeDeviceAutomatiquement($device);
+        } else {
+        $mylogical = $theEqLogic[0];
+            if ($mylogical->getIsEnable()) {
                 log::add('melcloud', 'debug', 'setdevice ' . $device['Device']['DeviceID']);
                 $mylogical->setConfiguration('deviceid', $device['Device']['DeviceID']);
                 $mylogical->setConfiguration('buildid', $device['BuildingID']);
@@ -269,7 +273,7 @@ class melcloud extends eqLogic
                         case 'FanSpeedValue':
                         case 'OperationModeValue':
                         case 'SetTemperatureValue':
-                            $operation = str_replace("Value","",$cmd->getLogicalId());
+                            $operation = str_replace("Value", "", $cmd->getLogicalId());
                             log::add('melcloud', 'debug', 'log de ' . $cmd->getLogicalId() . ' avec l\'operation ' . $operation . ' et la valeur' . $device['Device'][$operation]);
                             $cmd->setCollectDate('');
                             $cmd->event($device['Device'][$operation]);
@@ -282,11 +286,11 @@ class melcloud extends eqLogic
                             $arr = array('hasAutomatic' => $device['Device']['HasAutomaticFanSpeed']);
                             $cmd->setDisplay('parameters', $arr);
 
-                            //on break pas exprès pour le default!
+                        //on break pas exprès pour le default!
                         default:
                             log::add('melcloud', 'debug', 'log ' . $cmd->getLogicalId() . ' ' . $device['Device'][$cmd->getLogicalId()]);
-                            if('SetTemperature' == $cmd->getLogicalId())
-                                self::definirLaConfPourSliderTemperature($cmd,$device);
+                            if ('SetTemperature' == $cmd->getLogicalId())
+                                self::definirLaConfPourSliderTemperature($cmd, $device);
                             if ('LastTimeStamp' == $cmd->getLogicalId()) {
                                 $cmd->event(str_replace('T', ' ', $device['Device'][$cmd->getLogicalId()]));
                             } else {
@@ -312,7 +316,7 @@ class melcloud extends eqLogic
         }
     }
 
-    public static function obtenirInfo($mylogical)
+    private static function obtenirInfo($mylogical)
     {
         log::add('melcloud', 'debug', 'Obtenir Info pour la machine:  ' . $mylogical->getConfiguration('namemachine'));
         $montoken = config::byKey('MyToken', 'melcloud', '');
@@ -335,7 +339,7 @@ class melcloud extends eqLogic
         $mylogical->Refresh();
     }
 
-    public static function definirLaConfPourSliderTemperature($cmd,$device) {
+    private static function definirLaConfPourSliderTemperature($cmd,$device) {
         log::add('melcloud', 'debug', 'definir les temperatures Max et Min');
         log::add('melcloud', 'debug', 'OperationMode : '. $device['Device']['OperationMode']);
         log::add('melcloud', 'debug', 'MaxTempHeat : '. $device['Device']['MaxTempHeat']);
@@ -348,8 +352,16 @@ class melcloud extends eqLogic
             $cmd->setConfiguration('maxValue', intval($device['Device']['MaxTempCoolDry']));
             $cmd->setConfiguration('minValue',intval($device['Device']['MinTempCoolDry']));
         }
+    }
 
-
+    private static function definirLeDeviceAutomatiquement($device) {
+        $mylogical = new melcloud();
+        $mylogical->setIsVisible(0);
+        $mylogical->setIsEnable(0);
+        $mylogical->setEqType_name('melcloud');
+        $mylogical->setName($device['DeviceName']);
+        $mylogical->setConfiguration('namemachine',$device['DeviceName']);
+        $mylogical->save();
     }
 
     //Fonction exécutée automatiquement toutes les minutes par Jeedom
@@ -387,6 +399,7 @@ class melcloud extends eqLogic
         }
         $onoff_state->setType('info');
         $onoff_state->setSubType('binary');
+        $onoff_state->setDisplay('generic_type', 'ENERGY_STATE');
         $onoff_state->setEqLogic_id($this->getId());
         $onoff_state->setOrder(1);
         $onoff_state->save();
@@ -401,7 +414,8 @@ class melcloud extends eqLogic
             $on->setType('action');
             $on->setSubType('other');
             $on->setTemplate('dashboard', 'OnOffLight');
-            $on->setTemplate('mobile', 'ToggleSwitch_IMG');
+            $on->setTemplate('mobile', 'OnOffLight');
+            //$on->setTemplate('mobile', 'ToggleSwitch_IMG');
             $on->setIsHistorized(0);
             $on->setIsVisible(1);
             $on->setDisplay('generic_type', 'ENERGY_ON');
@@ -421,7 +435,8 @@ class melcloud extends eqLogic
             $off->setType('action');
             $off->setSubType('other');
             $off->setTemplate('dashboard', 'OnOffLight');
-            $off->setTemplate('mobile', 'ToggleSwitch_IMG');
+            $off->setTemplate('mobile', 'OnOffLight');
+            //$off->setTemplate('mobile', 'ToggleSwitch_IMG');
             $off->setIsHistorized(0);
             $off->setIsVisible(1);
             $off->setDisplay('generic_type', 'ENERGY_OFF');
@@ -456,6 +471,7 @@ class melcloud extends eqLogic
             $consigne->setType('action');
             $consigne->setSubType('slider');
             $consigne->setTemplate('dashboard', 'consigneTemp');
+            $consigne->setTemplate('mobile', 'consigneTemp');
             $consigne->setIsHistorized(0);
             $consigne->setUnite('°C');
             $consigne->setIsVisible(1);
@@ -479,7 +495,8 @@ class melcloud extends eqLogic
             $RoomTemperature->setType('info');
             $RoomTemperature->setSubType('numeric');
             $RoomTemperature->setTemplate('dashboard', 'TempImgSimple');
-            $RoomTemperature->setTemplate('mobile', 'tempIMG');
+            $RoomTemperature->setTemplate('mobile', 'TempImgSimple');
+            //$RoomTemperature->setTemplate('mobile', 'tempIMG');
             $RoomTemperature->setIsHistorized(0);
             $RoomTemperature->setIsVisible(1);
             $RoomTemperature->setUnite('°C');
@@ -547,6 +564,7 @@ class melcloud extends eqLogic
             $ventilation->setSubType('slider');
             $ventilation->setIsHistorized(0);
             $ventilation->setTemplate('dashboard', 'FanSpeed');
+            $ventilation->setTemplate('mobile', 'FanSpeed');
             $ventilation->setConfiguration('maxValue', 5);
             $ventilation->setIsVisible(1);
             $ventilation->setConfiguration('updateCmdId', $ventilation_value->getEqLogic_id());
