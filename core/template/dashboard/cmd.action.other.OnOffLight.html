@@ -15,15 +15,15 @@
     </style>
     <script>
         jeedom.cmd.update['#id#'] = function(options) {
-            if(options.state == 1 || options.state == '1' ) {
-                if (jeedom.cmd.normalizeName(options.name) == 'on') {
+            if (options.display_value == '1' || options.display_value == 1 || options.display_value == '99' || options.display_value == 99 || options.display_value == 'on') {
+                if (jeedom.cmd.normalizeName('#name#') == 'on') {
                     $('.cmd[data-cmd_id=#id#]').hide();
                 } else {
                     $('.cmd[data-cmd_id=#id#]').show();
                     $('#iconCmd#id#').empty().append('<img src="plugins/melcloud/core/template/dashboard/cmd.action.other.OnOffLight/power_on.png" class="OnOffLight#id#" />');
                 }
             } else {
-                if (jeedom.cmd.normalizeName(options.name) == 'off') {
+                if (jeedom.cmd.normalizeName('#name#') == 'off') {
                     $('.cmd[data-cmd_id=#id#]').hide();
                 } else {
                     $('.cmd[data-cmd_id=#id#]').show();
@@ -31,7 +31,7 @@
                 }
             }
         };
-        jeedom.cmd.update['#id#']({name: '#name#', state : #state#});
+        jeedom.cmd.update['#id#']({display_value : '#state#'});
         $('.cmd[data-cmd_id=#id#] .action_OnOffLight#id#').off();
         $('.cmd[data-cmd_id=#id#] .action_OnOffLight#id#').on('click', function() {
             jeedom.cmd.execute({id: '#id#'});
