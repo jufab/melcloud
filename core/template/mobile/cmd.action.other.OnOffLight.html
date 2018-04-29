@@ -15,20 +15,23 @@
     </style>
     <script>
         jeedom.cmd.update['#id#'] = function(options) {
-            if (jeedom.cmd.normalizeName(options.name) == 'on') {
-                $('#iconCmd#id#').append('<img src="plugins/melcloud/core/template/dashboard/cmd.action.other.OnOffLight/power_off.png" class="OnOffLight#id#" />');
-                if (options.state != 0) {
+            if(options.state == 1 || options.state == '1' ) {
+                if (jeedom.cmd.normalizeName(options.name) == 'on') {
                     $('.cmd[data-cmd_id=#id#]').hide();
+                } else {
+                    $('.cmd[data-cmd_id=#id#]').show();
+                    $('#iconCmd#id#').empty().append('<img src="plugins/melcloud/core/template/dashboard/cmd.action.other.OnOffLight/power_on.png" class="OnOffLight#id#" />');
                 }
-            }
-            if (jeedom.cmd.normalizeName(options.name) == 'off') {
-                $('#iconCmd#id#').append('<img src="plugins/melcloud/core/template/dashboard/cmd.action.other.OnOffLight/power_on.png" class="OnOffLight#id#"/>');
-                if (options.state == 0) {
+            } else {
+                if (jeedom.cmd.normalizeName(options.name) == 'off') {
                     $('.cmd[data-cmd_id=#id#]').hide();
+                } else {
+                    $('.cmd[data-cmd_id=#id#]').show();
+                    $('#iconCmd#id#').empty().append('<img src="plugins/melcloud/core/template/dashboard/cmd.action.other.OnOffLight/power_off.png" class="OnOffLight#id#"/>');
                 }
             }
         };
-        jeedom.cmd.update['#id#']({name: '#name#', state : '#state#'});
+        jeedom.cmd.update['#id#']({name: '#name#', state : #state#});
         $('.cmd[data-cmd_id=#id#] .action_OnOffLight#id#').off();
         $('.cmd[data-cmd_id=#id#] .action_OnOffLight#id#').on('click', function() {
             jeedom.cmd.execute({id: '#id#'});
