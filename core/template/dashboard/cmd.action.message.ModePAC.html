@@ -87,7 +87,7 @@
 
     <!-- la partie script -->
     <script>
-        var correspondance#id# = {'1':'chaud','2':'froid','3':'rafraichir','7':'ventilation','8':'auto'};
+        var correspondance#id# = {'1':'chaud','3':'froid','2':'rafraichir','7':'ventilation','8':'auto'};
         jeedom.cmd.update['#id#'] = function(options) {
             $('.cmd[data-cmd_id=#id#] .modeListe#id# #'+options.display_value+' i').addClass("selected");
             $('.cmd[data-cmd_id=#id#] .modeListe#id# li').each(function(){
