@@ -10,5 +10,7 @@
   "category": "wellness",
   "hasDependency": false,
   "hasOwnDeamon": false,
-  "maxDependancyInstallTime": 0
+  "maxDependancyInstallTime": 0,
+	"language" : ["fr_FR"],
+	"compatibility" : ["miniplus","smart","rpi","docker","diy","mobile","v4"]
 }
